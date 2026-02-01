@@ -1,0 +1,31 @@
+:root {
+    --eds-red: #dc3545;
+    --eds-gold: #fdba74;
+    --eds-white: #ffffff;
+}
+
+body {
+    background: linear-gradient(135deg, var(--eds-white) 0%, #f8f9fa 100%);
+    min-height: 100vh;
+}
+
+.login-card {
+    box-shadow: 0 10px 30px rgba(220, 53, 69, 0.1);
+    border: none;
+    border-radius: 20px;
+}
+
+.login-card .card-header {
+    background: linear-gradient(135deg, var(--eds-red), var(--eds-gold));
+    color: var(--eds-white);
+}
+
+.btn-login {
+    background: linear-gradient(135deg, var(--eds-red), var(--eds-gold));
+    border: none;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s;
+}

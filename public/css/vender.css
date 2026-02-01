@@ -1,0 +1,33 @@
+:root {
+    --eds-red: #dc3545;
+    --eds-gold: #fdba74;
+    --eds-white: #ffffff;
+}
+
+.navbar {
+    background: linear-gradient(135deg, var(--eds-red), var(--eds-gold));
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--eds-white) !important;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.ticket-preview {
+    border-left: 5px solid var(--eds-gold);
+    box-shadow: 0 5px 15px rgba(253, 186, 116, 0.3);
+}
+
+.btn-confirm {
+    background: linear-gradient(135deg, var(--eds-red), var(--eds-gold));
+    border: none;
+    color: white;
+}
+
+.d-none{
+    display: none;
+}

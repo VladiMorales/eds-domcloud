@@ -1,0 +1,21 @@
+:root {
+    --eds-red: #dc3545;
+    --eds-gold: #fdba74;
+}
+
+.navbar {
+    background: linear-gradient(135deg, var(--eds-red), var(--eds-gold));
+}
+
+.navbar-brand,
+.nav-link {
+    color: white !important;
+}
+
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.stat-box {
+    height: 120px;
+}
