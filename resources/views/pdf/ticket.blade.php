@@ -32,7 +32,7 @@
         }
 
         .card-body {
-            padding: 30px;
+            padding: 5px;
             text-align: center;
         }
 
@@ -67,6 +67,22 @@
         .page-break {
             page-break-after: always;
         }
+        
+        .img-logo{
+            width: 65%;
+        }
+
+        .boleto-titulo{
+            font-size: 15px;
+        }
+
+        .nombre-psj{
+            font-size: 25px !important;
+        }
+
+        .boleto-no{
+            font-size: 15px !important;
+        }
     </style>
 </head>
 <body>
@@ -79,14 +95,18 @@
             </div>
             
             <div class="card-body">
-                <h2>BOLETO EDS #{{ $boleto['id'] }}</h2>                
+                <img src="{{ public_path('img/enlaces_logo.jpeg') }}" class="img-logo" alt="">
+                <h5 class="boleto-titulo">SAN CRISTOBAL DE LAS CASAS, CHIAPAS</h5>
+                <h2 class="boleto-no">BOLETO No. #{{ $boleto['id'] }}</h2>                
                 
-                <h3>{{ $boleto['nombre_pasajero'] }}</h3>
+                <h3 class="nombre-psj">{{ $boleto['nombre_pasajero'] }}</h3>
+                
                 
                 <div class="route-info">
-                    {{-- &rarr;  --}}{{ $boleto['destino'] }}<br>
+                    <!-- {{-- &rarr;  --}} -->{{ $boleto['destino'] }}<br>
                     {{ $boleto['fecha'] }}<br>
-                    {{ $boleto['horario'] }}
+                    {{ $boleto['horario'] }}<br>
+                    Abordaje: {{ $boleto['zona'] }}
                 </div>
 
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
@@ -94,14 +114,27 @@
                 <div class="price">
                     ${{ number_format($boleto['precio'], 2) }} MXN<br>
                     Tipo: {{ $boleto['tipo'] }}
+                    
                 </div>
 
                 <div class="badge-vendido">
                     VENDIDO
                 </div>
-                
-                <div style="margin-top: 20px;">
+                <div class="route-info">
+                    <p>ATENCIÓN A CLIENTES: 967 166 5525</p>
+                    <p>
+                        Valido únicamente para la fecha y hora marcadas en el boleto<br>
+                        Incluido el seguro del viajero
+                    </p>
+                    <p>Ventas y Facturación: ventas.enlacesds@outlook.es<br>
+                        Este boleto es canjeable por factura
+                    </p>
+                </div>
+                <!-- {{-- <div style="margin-top: 20px;">
                     <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate($boleto['folio'])) !!} ">
+                </div> --}} -->
+                <div style="margin-top: 20px;">
+                    
                 </div>
             </div>
         </div>

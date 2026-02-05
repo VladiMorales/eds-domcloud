@@ -14,7 +14,8 @@ class Boleto extends Model
         'precio',        
         'folio',
         'corrida_id',
-        'venta_id'
+        'venta_id',
+        'zona_id'
     ];
 
     public function corrida()
@@ -24,5 +25,9 @@ class Boleto extends Model
 
     public function venta(){
         return $this->belongsTo(Venta::class);
+    }
+
+    public function zona(){
+        return $this->belongsTo(Zona::class);
     }
 }

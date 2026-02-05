@@ -59,6 +59,17 @@
                                         <option value="Transferencia">Transferencia</option>
                                     </select>
                                 </div>
+                                
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">Zona de abordaje</label>
+                                    <select name="zona" class="form-select" required>
+                                        <option value="">--Selecciona Zona--</option>
+                                        @foreach ($zonas as $zona)
+                                            <option value="{{ $zona->id }}">{{ $zona->direccion }}</option>
+                                        @endforeach
+                                                                                
+                                    </select>
+                                </div>
 
                                 <div class="col-12 mb-3">
                                     <label class="form-label">Agencia</label>
@@ -76,7 +87,7 @@
                             </button>
                         </form>
                         <button type="submit" class="mt-2 btn btn-confirm w-100">
-                            <i class="bi bi-check-circle me-2"></i>Cancelar Venta
+                            <i class="bi bi-x-circle me-2"></i>Cancelar Venta
                         </button>
                     </div>
                 </div>

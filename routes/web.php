@@ -7,11 +7,13 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RealizarVentaController;
+use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
@@ -19,9 +21,6 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
-/* Route::get('/ticket', function(){
-    return view('pdf.ticket');
-}); */
 
 Route::middleware('auth')->group(function(){
 
@@ -47,6 +46,9 @@ Route::middleware('auth')->group(function(){
     Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.delete');
     Route::patch('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
 
+
+    /* Rutas reportes */
+    Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes');
 
     /* Cerrar sesión */
     Route::post('/logout', [LogoutController::class, 'store'])->name('logout');

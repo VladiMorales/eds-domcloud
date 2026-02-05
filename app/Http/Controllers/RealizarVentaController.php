@@ -6,6 +6,7 @@ use Safe\url;
 use App\Models\Venta;
 use App\Models\Agencia;
 use App\Models\Corrida;
+use App\Models\Zona;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
@@ -31,10 +32,13 @@ class RealizarVentaController extends Controller
     public function pasajeros($id, $numBoletos)
     {
         $agencias = Agencia::all();
+        $zonas = Zona::all();
         return view('ventas.datosPasajero', [
             'id' => $id, 
             'numBoletos' => $numBoletos, 
-            'agencias' => $agencias]
+            'agencias' => $agencias,
+            'zonas'    => $zonas
+            ]
         );
     }
 
@@ -42,6 +46,7 @@ class RealizarVentaController extends Controller
     {        
         //Busca la corrida y calcula el total de la venta
         $corrida = Corrida::find($request->corrida);
+        $zona = Zona::find($request->zona);
         //$total = $corrida->precio_boleto * $request->boletos;
         if($corrida->boletos_disponibles < $request->boletos){
             dd("Error Boletos no Disponibles");
@@ -78,7 +83,8 @@ class RealizarVentaController extends Controller
                 'tipo'   => $request->$tipo,
                 'precio' => $precio,
                 'folio'  => '',
-                'venta_id' => $venta->id
+                'venta_id' => $venta->id,
+                'zona_id'  => $zona->id
             ]);
             
             $boleto->folio = $corrida->id.$venta->id.$boleto->id;
@@ -92,7 +98,8 @@ class RealizarVentaController extends Controller
                 'horario' => $corrida->horario,
                 'tipo'    => $request->$tipo,
                 'precio'  => $precio,
-                'folio'   => $boleto->folio                
+                'folio'   => $boleto->folio,
+                'zona'    => $zona->direccion,    
             ];
             array_push($boletos, $b);
 
