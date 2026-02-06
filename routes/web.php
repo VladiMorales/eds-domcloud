@@ -9,6 +9,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RealizarVentaController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViajesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +34,11 @@ Route::middleware('auth')->group(function(){
     Route::get('/pasajeros/{id}/{numBoletos}', [RealizarVentaController::class, 'pasajeros'])->name('pasajeros.nombres');
     Route::post('/realizar-venta', [RealizarVentaController::class, 'venta'])->name('realizar.venta');
     Route::get('/boletos', [RealizarVentaController::class, 'boletos'])->name('boletos');
+
+
+    /* Rutas para la venta de viajes */
+    Route::get('/viajes', [ViajesController::class, 'index'])->name('viajes');
+    Route::post('/viajes', [ViajesController::class, 'store']);
 
     /* Rutas para Crear, editar y eliminar corridas */
     Route::get('/corridas', [CorridasController::class, 'index'])->name('corridas');

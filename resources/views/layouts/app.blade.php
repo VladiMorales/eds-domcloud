@@ -26,7 +26,9 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('corridas') }}"><i
                                 class="bi bi-bus-front-fill me-1"></i>Corridas</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('buscar.corridas') }}"><i
-                                class="bi bi-cart me-1"></i>Ventas</a></li>                    
+                                class="bi bi-cart me-1"></i>Ventas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('viajes') }}"><i
+                                class="bi bi-luggage me-1"></i>Viajes</a></li>                   
                     <li class="nav-item"><a class="nav-link" href="{{ route('usuarios') }}"><i
                                 class="bi bi-people me-1"></i>Usuarios</a></li>
                     <li class="nav-item"><a class="nav-link" href="reportes.html"><i

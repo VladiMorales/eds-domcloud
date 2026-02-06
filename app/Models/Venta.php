@@ -19,4 +19,9 @@ class Venta extends Model
     {
         return $this->hasMany(Boleto::class);
     }
+
+    public function viaje()
+    {
+        return $this->belongsTo(Viaje::class);
+    }
 }

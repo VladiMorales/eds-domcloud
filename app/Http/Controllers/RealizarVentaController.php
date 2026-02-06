@@ -97,8 +97,7 @@ class RealizarVentaController extends Controller
                 'fecha'   => $corrida->fecha,
                 'horario' => $corrida->horario,
                 'tipo'    => $request->$tipo,
-                'precio'  => $precio,
-                'folio'   => $boleto->folio,
+                'precio'  => $precio,                
                 'zona'    => $zona->direccion,    
             ];
             array_push($boletos, $b);
