@@ -31,7 +31,7 @@
                                 class="bi bi-luggage me-1"></i>Viajes</a></li>                   
                     <li class="nav-item"><a class="nav-link" href="{{ route('usuarios') }}"><i
                                 class="bi bi-people me-1"></i>Usuarios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="reportes.html"><i
+                    <li class="nav-item"><a class="nav-link" href="{{ route('reportes') }}"><i
                                 class="bi bi-graph-up me-1"></i>Reportes</a></li>
                 </ul>
                 <ul class="navbar-nav">
