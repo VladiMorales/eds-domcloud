@@ -55,6 +55,10 @@ Route::middleware('auth')->group(function(){
 
     /* Rutas reportes */
     Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes');
+    Route::post('/reportes', [ReportesController::class, 'filtrar']);
+
+    Route::get('/reportes/excel', [ReportesController::class, 'descargarExcel'])->name('reportes.excel');
+    Route::get('/reportes/pdf', [ReportesController::class, 'descargarPdf'])->name('reportes.pdf');
 
     /* Cerrar sesión */
     Route::post('/logout', [LogoutController::class, 'store'])->name('logout');

@@ -53,30 +53,43 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5><i class="bi bi-filter me-2"></i>Filtros Reportes</h5>
                 <button class="btn" style="background: var(--eds-gold); color: #000;">Generar PDF</button>
+                <a href="{{ route('reportes.excel', request()->query()) }}" class="btn" style="background: var(--eds-gold); color: #000;">Generar XLSX</a>
             </div>
             <div class="card-body">
-                <form class="row g-3">
+                <form class="row g-3" method="POST" action="{{ route('reportes') }}">
+                    @csrf
                     <div class="col-md-3">
                         <label class="form-label">Fecha Inicial</label>
-                        <input type="date" class="form-control">
+                        <input type="date" name="fecha_inicio" class="form-control" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Fecha Final</label>
-                        <input type="date" class="form-control">
+                        <input type="date" name="fecha_fin" class="form-control" required>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Destino</label>
-                        <select class="form-select">
-                            <option>Todos</option>
-                            <option>Tuxtla</option>
-                            <option>CDMX</option>
+                        <label class="form-label">Tipo</label>
+                        <select name="tipo" class="form-select" required>
+                            <option value="todas">Todas</option>
+                            <option value="boletos">Boletos</option>
+                            <option value="viajes">Viajes</option>                            
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Usuario</label>
-                        <select class="form-select">
-                            <option>Todos</option>
-                            <option>Juan Pérez</option>
+                        <select name="usuario" class="form-select" required>
+                            <option value="todos">Todos</option>
+                            @foreach ($usuarios as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach                                                        
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Agencias</label required>
+                        <select name="agencia" class="form-select">
+                            <option value="todas">Todas</option>
+                            @foreach ($agencias as $agencia)
+                                <option value="{{ $agencia->id }}">{{ $agencia->nombre }}</option>
+                            @endforeach                                                        
                         </select>
                     </div>
                     <div class="col-12">
@@ -105,17 +118,13 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($ventas as $venta)
-                            @php
-                                $boletosV =  $venta->boletos_vendidos>0 ? $venta->boletos_vendidos : 'Viaje';
-                            @endphp
-                                <tr>
-                                    
+                            @foreach ($ventas as $venta)                            
+                                <tr>                                    
                                     <td>#{{ $venta->id }}</td>
-                                    <td>{{ $boletosV }}</td>
+                                    <td>{{ $venta->boletos_vendidos>0 ? $venta->boletos_vendidos : 'Viaje' }}</td>
                                     <td>${{ $venta->total }}</td>
-                                    <td>{{  $venta->metodo_pago }}</td>
-                                    <td>{{ $venta->fecha }}</td>
+                                    <td>{{ $venta->metodo_pago }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($venta->fecha)->format('d/m/Y') }}</td>
                                     <td>{{ $venta->user->name }}</td>
                                     <td>{{ $venta->agencia->nombre }}</td>
                                 </tr>
