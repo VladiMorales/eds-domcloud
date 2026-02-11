@@ -22,15 +22,7 @@
                         <p class="mb-0">Boletos Vendidos</p>
                     </div>
                 </div>
-            </div>
-            {{-- <div class="col-md-3">
-                <div class="card stat-box text-center border-0 shadow-sm">
-                    <div class="card-body">
-                        <h2 class="text-warning mb-1">234</h2>
-                        <p class="mb-0">Reservados</p>
-                    </div>
-                </div>
-            </div> --}}
+            </div>            
             <div class="col-md-3">
                 <div class="card stat-box text-center border-0 shadow-sm">
                     <div class="card-body">
@@ -38,22 +30,16 @@
                         <p class="mb-0">Ingresos Total</p>
                     </div>
                 </div>
-            </div>
-            {{-- <div class="col-md-3">
-                <div class="card stat-box text-center border-0 shadow-sm">
-                    <div class="card-body">
-                        <h2 class="text-info mb-1">98%</h2>
-                        <p class="mb-0">Tasa Ocupación</p>
-                    </div>
-                </div>
-            </div> --}}
+            </div>            
         </div>
 
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5><i class="bi bi-filter me-2"></i>Filtros Reportes</h5>
-                <button class="btn" style="background: var(--eds-gold); color: #000;">Generar PDF</button>
-                <a href="{{ route('reportes.excel', request()->query()) }}" class="btn" style="background: var(--eds-gold); color: #000;">Generar XLSX</a>
+                <div>
+                    <a href="{{ route('reportes.pdf', request()->query()) }}" class="btn" style="background: var(--eds-gold); color: #000;">Generar PDF</a>
+                    <a href="{{ route('reportes.excel', request()->query()) }}" class="btn" style="background: var(--eds-gold); color: #000;">Generar XLSX</a>
+                </div>
             </div>
             <div class="card-body">
                 <form class="row g-3" method="POST" action="{{ route('reportes') }}">

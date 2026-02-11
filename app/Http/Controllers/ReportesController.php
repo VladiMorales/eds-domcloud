@@ -8,6 +8,7 @@ use App\Models\Boleto;
 use App\Models\Agencia;
 use App\Exports\VentaExport;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportesController extends Controller
@@ -63,5 +64,15 @@ class ReportesController extends Controller
 
         // 2. Generamos el Excel pasando los datos
         return Excel::download(new VentaExport($ventas), 'reporte_ventas.xlsx');
+    }
+
+    public function descargarPdf(Request $request)
+    {
+        $ventas = Venta::query()->aplicarFiltros($request->all())->get();
+    
+        $pdf = Pdf::loadView('exports.ventas_pdf', compact('ventas'))
+            ->setPaper('a4'); 
+
+        return $pdf->download('reporte_ventas.pdf');
     }
 }
