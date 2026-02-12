@@ -17,7 +17,7 @@ class ZonaSeeder extends Seeder
         $zonas = [
             'Terminal Miguel Hidalgo',
             'Terminal Boulevard',
-            'Central de Pasajeros',
+            'Central de Pasajeros del Sur',
             'Enlaces Express'
         ];
 

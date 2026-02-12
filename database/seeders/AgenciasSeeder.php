@@ -14,6 +14,7 @@ class AgenciasSeeder extends Seeder
     public function run(): void
     {
         $agencias = [
+            'Enlaces del Sur',
             'Xonab',
             'W destinos',
             'Pollo',
@@ -23,11 +24,13 @@ class AgenciasSeeder extends Seeder
             'Popolvu',
             'Turtux',
             'Escudo Jaguar',
-            'Viajes al corazón',
-            'Get viajes',
+            'Viajes al Corazón',
+            'Get Viajes',
             'Ávalos',
-            'Info turística',
-            'Turística colonia',
+            'Info Turística',
+            'Turística Colonial',
+            'Chiapaneca Tours',
+            'Camino Travel'
         ];
 
         foreach ($agencias as $nombre) {

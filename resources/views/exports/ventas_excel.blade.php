@@ -1,7 +1,7 @@
 <table>
     <thead>
         <tr>
-            <td colspan="7" style="text-align: center; background-color: #000000; color: #ffffff; font-weight: bold;">
+            <td colspan="7" style="text-align: center; background-color: #f59a69; color: #000; font-weight: bold;">
                 REPORTE DE VENTAS - ENLACES DEL SUR
             </td>
         </tr>

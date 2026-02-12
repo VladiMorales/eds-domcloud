@@ -26,8 +26,8 @@
             left: 0cm;
             right: 0cm;
             height: 2cm;
-            background-color: #2c3e50;
-            color: white;
+            background-color: #f59a69;
+            color: #000;
             text-align: center;
             line-height: 1.5cm; /* Centrar verticalmente */
             padding-top: 0.5cm; /* Ajuste visual */

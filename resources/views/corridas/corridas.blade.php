@@ -149,16 +149,7 @@
                         <div class="mb-3">
                             <label class="form-label">Horario de Salida</label>
                             <input type="time" id="horarioEdit" name="horario" class="form-control" required>
-                        </div>
-                        {{-- <div class="mb-3">
-                            <label class="form-label">Precio del Boleto</label>
-                            <input type="number" id="precioEdit" name="precio_boleto" class="form-control" required>
-                        </div> --}}
-                        {{-- <div class="mb-3">
-                            <label class="form-label">Boletos Disponibles</label>
-                            <input type="number" name="boletos_disponibles" value="14" class="form-control" required>
-                        </div>   --}}                      
-                    
+                        </div>                                                             
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
