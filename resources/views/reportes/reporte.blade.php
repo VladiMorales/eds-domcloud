@@ -46,18 +46,18 @@
                     @csrf
                     <div class="col-md-3">
                         <label class="form-label">Fecha Inicial</label>
-                        <input type="date" name="fecha_inicio" class="form-control" required>
+                        <input type="date" value="{{old('fecha_inicio', request('fecha_inicio'))}}" name="fecha_inicio" class="form-control" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Fecha Final</label>
-                        <input type="date" name="fecha_fin" class="form-control" required>
+                        <input type="date" value="{{old('fecha_fin', request('fecha_fin'))}}" name="fecha_fin" class="form-control" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Tipo</label>
                         <select name="tipo" class="form-select" required>
-                            <option value="todas">Todas</option>
-                            <option value="boletos">Boletos</option>
-                            <option value="viajes">Viajes</option>                            
+                            <option value="todas" {{ old('tipo', request('tipo')) == 'todas' ? 'selected' : '' }}>Todas</option>
+                            <option value="boletos" {{ old('tipo', request('tipo')) == 'boletos' ? 'selected' : '' }}>Boletos</option>
+                            <option value="viajes" {{ old('tipo', request('tipo')) == 'viajes' ? 'selected' : '' }}>Viajes</option>                            
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -65,7 +65,7 @@
                         <select name="usuario" class="form-select" required>
                             <option value="todos">Todos</option>
                             @foreach ($usuarios as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{$user->id}}" {{ old('usuario', request('usuario')) == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
                             @endforeach                                                        
                         </select>
                     </div>
@@ -74,7 +74,7 @@
                         <select name="agencia" class="form-select">
                             <option value="todas">Todas</option>
                             @foreach ($agencias as $agencia)
-                                <option value="{{ $agencia->id }}">{{ $agencia->nombre }}</option>
+                                <option value="{{$agencia->id}}" {{ old('agencia', request('agencia')) == $agencia->id ? 'selected' : '' }}>{{ $agencia->nombre }}</option>
                             @endforeach                                                        
                         </select>
                     </div>
