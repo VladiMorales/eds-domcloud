@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Agencia extends Model
 {
     //
+    protected $fillable = [
+        'nombre'
+    ];
 
     public function ventas()
     {

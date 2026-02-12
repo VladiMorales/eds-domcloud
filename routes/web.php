@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgenciaController;
 use App\Http\Controllers\CorridasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -43,6 +44,8 @@ Route::middleware('auth')->group(function(){
     /* Rutas para Crear, editar y eliminar corridas */
     Route::get('/corridas', [CorridasController::class, 'index'])->name('corridas');
     Route::post('/corridas', [CorridasController::class, 'store']);
+    Route::post('/corridas-filtradas', [CorridasController::class, 'filtrar'])->name('corridas.filtrar');
+    Route::get('/corridas-pasajeros/{id}', [CorridasController::class, 'boletos'])->name('corridas.pasajeros');
     Route::delete('/corridas/{id}', [CorridasController::class, 'destroy'])->name('corridas.delete');
     Route::patch('/corridas/{id}', [CorridasController::class, 'update'])->name('corridas.update');
 
@@ -59,6 +62,12 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/reportes/excel', [ReportesController::class, 'descargarExcel'])->name('reportes.excel');
     Route::get('/reportes/pdf', [ReportesController::class, 'descargarPdf'])->name('reportes.pdf');
+
+    /* Rutas para agencia */
+    Route::get('/agencias', [AgenciaController::class, 'index'])->name('agencias');
+    Route::post('/agencias', [AgenciaController::class, 'store']);    
+    Route::delete('/agencias/{id}', [AgenciaController::class, 'destroy'])->name('agencias.delete');
+    Route::patch('/agencias/{id}', [AgenciaController::class, 'update'])->name('agencias.update');
 
     /* Cerrar sesión */
     Route::post('/logout', [LogoutController::class, 'store'])->name('logout');

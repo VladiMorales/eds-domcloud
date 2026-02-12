@@ -24,6 +24,30 @@
             </button>
         </div>
         <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5><i class="bi bi-filter me-2"></i>Filtrar Corridas Por Fecha</h5>                
+            </div>
+            <div class="card-body">
+                <form class="row g-3" method="POST" action="{{ route('corridas.filtrar') }}">
+                    @csrf
+                    <div class="col-md-3">
+                        <label class="form-label">Fecha Inicial</label>
+                        <input type="date" name="fecha_inicio" class="form-control" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Fecha Final</label>
+                        <input type="date" name="fecha_fin" class="form-control" required>
+                    </div>
+                                                            
+                    <div class="col-12">
+                        <button type="submit" class="btn" style="background: var(--eds-red); color: white;">Aplicar
+                            Filtros</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>        
+        <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -54,10 +78,13 @@
                                         <form action="{{ route('corridas.delete', ['id' => $corrida->id]) }}" method="POST" id="form-eliminar{{ $corrida->id }}">
                                             @method('DELETE')
                                             @csrf
-                                            <button onclick="eliminarC({{ $corrida->id }})" type="submit" class="btn btn-sm btn-outline-danger">
+                                            <button onclick="eliminarC({{ $corrida->id }})" type="submit" class="btn btn-sm btn-outline-danger me-1">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </form>
+                                        <a href="{{ route('corridas.pasajeros', ['id' => $corrida->id]) }}" class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="bi bi-list-task"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

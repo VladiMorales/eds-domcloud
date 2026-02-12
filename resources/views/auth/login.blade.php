@@ -15,7 +15,7 @@
     <div class="card login-card w-100" style="max-width: 400px;">
         <div class="card-header text-center py-4">
             <h2 class="mb-0"><i class="bi bi-bus-front me-2"></i>EDS</h2>
-            <p class="mb-0 opacity-75">EJECUTIVOS DEL SURESTE</p>
+            <p class="mb-0 opacity-75">ENLACES DEL SUR</p>
         </div>
         <div class="card-body p-4">
             <form method="POST" action="{{ route('login') }}">

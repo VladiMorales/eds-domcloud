@@ -43,7 +43,7 @@
              target="_blank">
             Descargar boletos
           </a>
-          <a class="btn btn-outline-secondary" href="{{ route('dashboard') }}">
+          <a class="btn btn-outline-secondary" href="{{ route('buscar.corridas') }}">
             Volver
           </a>
         </div>

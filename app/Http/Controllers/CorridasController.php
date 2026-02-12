@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Boleto;
 use App\Models\Corrida;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CorridasController extends Controller
 {
@@ -13,6 +15,15 @@ class CorridasController extends Controller
         $corridas = Corrida::where('boletos_disponibles', '>', 0)->where('fecha', Carbon::now()->format('Y-m-d'))->get();        
         return view('corridas.corridas', ["corridas" => $corridas]);
     }
+
+    public function filtrar(Request $request)
+    {
+        $corridas = Corrida::where('boletos_disponibles', '>', 0)
+                            ->whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin])->get();        
+        return view('corridas.corridas', ["corridas" => $corridas]);
+    }
+
+    
 
     public function store(Request $request)
     {        
@@ -50,5 +61,17 @@ class CorridasController extends Controller
         $corrida->save();
 
         return redirect()->route('corridas')->with('mensaje', 'editado');
+    }
+
+    public function boletos($id)
+    {
+        $boletos = Boleto::where('corrida_id', $id)->get();
+        $corrida = Corrida::find($id);
+        $fecha = Carbon::parse($corrida->fecha)->format('d/m/y');
+        $horario = Carbon::parse($corrida->horario)->format('H:i');
+        $pdf = Pdf::loadView('exports.pasajeros_pdf', ['boletos' => $boletos, 'id' => $id, 'fecha' => $fecha, 'horario' => $horario])
+            ->setPaper('a4'); 
+
+        return $pdf->download('pasajeros_corrida_'.$id.'.pdf');
     }
 }

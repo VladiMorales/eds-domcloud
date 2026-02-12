@@ -33,6 +33,8 @@
                                 class="bi bi-people me-1"></i>Usuarios</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('reportes') }}"><i
                                 class="bi bi-graph-up me-1"></i>Reportes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('agencias') }}"><i
+                                class="bi bi-shop-window me-1"></i>Agencias</a></li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
