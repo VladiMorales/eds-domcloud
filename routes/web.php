@@ -41,6 +41,17 @@ Route::middleware('auth')->group(function(){
     Route::get('/viajes', [ViajesController::class, 'index'])->name('viajes');
     Route::post('/viajes', [ViajesController::class, 'store']);
 
+    /* Cerrar sesión */
+    Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+});
+
+Route::middleware('can:isAdmin')->group(function () {
+    /* Rutas para Crear, editar y eliminar usuarios */
+    Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
+    Route::post('/usuarios', [UserController::class, 'store']);
+    Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.delete');
+    Route::patch('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
+
     /* Rutas para Crear, editar y eliminar corridas */
     Route::get('/corridas', [CorridasController::class, 'index'])->name('corridas');
     Route::post('/corridas', [CorridasController::class, 'store']);
@@ -48,13 +59,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/corridas-pasajeros/{id}', [CorridasController::class, 'boletos'])->name('corridas.pasajeros');
     Route::delete('/corridas/{id}', [CorridasController::class, 'destroy'])->name('corridas.delete');
     Route::patch('/corridas/{id}', [CorridasController::class, 'update'])->name('corridas.update');
-
-    /* Rutas para Crear, editar y eliminar usuarios */
-    Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
-    Route::post('/usuarios', [UserController::class, 'store']);
-    Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.delete');
-    Route::patch('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
-
 
     /* Rutas reportes */
     Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes');
@@ -68,8 +72,5 @@ Route::middleware('auth')->group(function(){
     Route::post('/agencias', [AgenciaController::class, 'store']);    
     Route::delete('/agencias/{id}', [AgenciaController::class, 'destroy'])->name('agencias.delete');
     Route::patch('/agencias/{id}', [AgenciaController::class, 'update'])->name('agencias.update');
-
-    /* Cerrar sesión */
-    Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 });
 

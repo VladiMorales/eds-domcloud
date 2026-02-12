@@ -23,23 +23,28 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}"><i
                                 class="bi bi-house me-1"></i>Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('corridas') }}"><i
-                                class="bi bi-bus-front-fill me-1"></i>Corridas</a></li>
+                    @can('isAdmin')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('corridas') }}"><i
+                                class="bi bi-bus-front-fill me-1"></i>Corridas</a></li>    
+                    @endcan                                
+                    
                     <li class="nav-item"><a class="nav-link" href="{{ route('buscar.corridas') }}"><i
                                 class="bi bi-cart me-1"></i>Ventas</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('viajes') }}"><i
                                 class="bi bi-luggage me-1"></i>Viajes</a></li>                   
-                    <li class="nav-item"><a class="nav-link" href="{{ route('usuarios') }}"><i
+                    @can('isAdmin')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('usuarios') }}"><i
                                 class="bi bi-people me-1"></i>Usuarios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('reportes') }}"><i
-                                class="bi bi-graph-up me-1"></i>Reportes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('agencias') }}"><i
-                                class="bi bi-shop-window me-1"></i>Agencias</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('reportes') }}"><i
+                                    class="bi bi-graph-up me-1"></i>Reportes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('agencias') }}"><i
+                                    class="bi bi-shop-window me-1"></i>Agencias</a></li>    
+                    @endcan                    
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle me-1"></i>Usuario
+                            <i class="bi bi-person-circle me-1"></i>{{ auth()->user()->username }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <form action="{{ route('logout') }} " method="POST">
