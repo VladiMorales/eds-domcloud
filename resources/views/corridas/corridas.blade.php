@@ -32,11 +32,11 @@
                     @csrf
                     <div class="col-md-3">
                         <label class="form-label">Fecha Inicial</label>
-                        <input type="date" name="fecha_inicio" class="form-control" required>
+                        <input type="date" name="fecha_inicio"  value="{{old('fecha_inicio', request('fecha_inicio'))}}" class="form-control" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Fecha Final</label>
-                        <input type="date" name="fecha_fin" class="form-control" required>
+                        <input type="date" name="fecha_fin" value="{{old('fecha_fin', request('fecha_fin'))}}" class="form-control" required>
                     </div>
                                                             
                     <div class="col-12">
@@ -58,6 +58,7 @@
                                 <th>Fecha</th>
                                 <th>Horario</th>                               
                                 <th>Boletos Disponibles</th>
+                                <th>Boletos Vendidos</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -68,8 +69,8 @@
                                     <td>{{ $corrida->destino }}</td>
                                     <td>{{ $corrida->fecha }}</td>
                                     <td>{{ $corrida->horario }}</td>                                                                    
-                                    <td>{{ $corrida->boletos_disponibles }}</td>                                    
-                                    {{-- <td><span class="badge bg-success">Activo</span></td> --}}
+                                    <td>{{ $corrida->boletos_disponibles }}</td>
+                                    <td>{{ (14 - $corrida->boletos_disponibles) }}</td>                                   
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-outline-primary me-1" onclick="llenarInputs({{ $corrida }})" data-bs-toggle="modal"
                                             data-bs-target="#corridaEditModal">

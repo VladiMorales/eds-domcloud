@@ -25,6 +25,7 @@
                                 <th>ID</th>
                                 <th>Horario</th>                                
                                 <th>Boletos Disponibles</th>
+                                <th>Boletos Vendidos</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -33,7 +34,8 @@
                                 <tr>
                                     <td>{{ $corrida->id }}</td>
                                     <td>{{ $corrida->horario }}</td>                                                                    
-                                    <td>{{ $corrida->boletos_disponibles }}</td>                                                                        
+                                    <td>{{ $corrida->boletos_disponibles }}</td>
+                                    <td>{{ (14 - $corrida->boletos_disponibles) }}</td>                                                                         
                                     <td class="d-flex">
                                         <a href="{{ route('pasajeros.nombres', ['id'=>$corrida->id, 'numBoletos' => $numBoletos]) }}" class="btn btn-sm btn-outline-primary me-1">
                                             <i class="bi bi-cart2">Comprar</i>
