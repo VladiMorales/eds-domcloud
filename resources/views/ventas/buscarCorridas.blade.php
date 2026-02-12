@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endsection
 
+@section('scripts-head')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@endsection
+
 @section('contenido')
     {{-- Aqui va el contenido --}}
     <section class="d-flex align-items-center justify-content-center p-3">
@@ -34,5 +38,17 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')    
+    @if (session('mensaje') == 'error')
+        <script>
+            Swal.fire({
+                title: "Boletos no disponibles",
+                icon: "error",
+                draggable: true
+            });
+        </script>
+    @endif
 @endsection
     

@@ -49,7 +49,7 @@ class RealizarVentaController extends Controller
         $zona = Zona::find($request->zona);
         //$total = $corrida->precio_boleto * $request->boletos;
         if($corrida->boletos_disponibles < $request->boletos){
-            dd("Error Boletos no Disponibles");
+            return redirect()->route('buscar.corridas')->with('mensaje', 'error');
         }
         $total = 0;             
         //Disminuye el número de boletos disponibles en la venta      

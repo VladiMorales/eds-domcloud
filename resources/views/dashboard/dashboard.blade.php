@@ -10,7 +10,7 @@
 
 @section('contenido')
     <div class="container-fluid mt-4">
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-3 mb-4">
                 <div class="card stat-card h-100 text-center">
                     <div class="card-header">
@@ -51,13 +51,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h5>Últimos Boletos</h5>
-                        <a href="vender.html" class="btn btn-sm" style="background: var(--eds-gold); color: #000;">+
+                        <a href="{{ route('buscar.corridas') }}" class="btn btn-sm" style="background: var(--eds-gold); color: #000;">+
                             Nuevo</a>
                     </div>
                     <div class="card-body">
@@ -65,28 +65,25 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Folio</th>
-                                        <th>Destino</th>
+                                        <th>Folio</th>                                        
                                         <th>Fecha</th>
+                                        <th>Pasajero</th>
                                         <th>Usuario</th>
-                                        <th>Estatus</th>
+                                        <th>Agencia</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>#001</td>
-                                        <td>Tuxtla Gutiérrez</td>
-                                        <td>2026-01-10</td>
-                                        <td>Juan Pérez</td>
-                                        <td><span class="badge bg-success">Vendido</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#002</td>
-                                        <td>CDMX</td>
-                                        <td>2026-01-11</td>
-                                        <td>María López</td>
-                                        <td><span class="badge bg-warning">Reservado</span></td>
-                                    </tr>
+                                    @foreach ($boletos as $boleto)
+                                        <tr>
+                                            <td>#{{ $boleto->id }}</td>
+                                            <td>{{ $boleto->venta->fecha }}</td>
+                                            <td>{{ $boleto->pasajero_nombre }}</td>
+                                            <td>{{ $boleto->venta->user->name }}</td>
+                                            <td>{{ $boleto->venta->agencia->nombre }}</td>
+                                            <td><span class="badge bg-success">Vendido</span></td>
+                                        </tr>    
+                                    @endforeach                                 
                                 </tbody>
                             </table>
                         </div>
