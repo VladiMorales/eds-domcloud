@@ -9,7 +9,10 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('auth.login');
+        if (Auth::check()) {
+            return redirect()->route('dashboard'); // Si ya está autenticado, redirigir al dashboard
+        }
+        return view('auth.login');        
     }
 
     public function store(Request $request)
@@ -25,7 +28,7 @@ class LoginController extends Controller
             'password' => $request->password
         ])){
             //Redirigimos con error
-            return back()->with('mensaje', 'Credenciales Incorrectas');
+            return back()->with('mensaje', 'incorrecto');
         }
 
         return redirect()->route('dashboard');

@@ -13,7 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViajesController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 
@@ -23,7 +23,7 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
-
+//Rutas generales para un administrador y vendedor
 Route::middleware('auth')->group(function(){
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 });
 
+//Rutas para un administrador
 Route::middleware('can:isAdmin')->group(function () {
     /* Rutas para Crear, editar y eliminar usuarios */
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');

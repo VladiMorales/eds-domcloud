@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="shortcut icon" href="img/eds.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="d-flex align-items-center justify-content-center p-3">
@@ -28,9 +29,9 @@
                     <label class="form-label">Contraseña</label>
                     <input type="password" name="password" class="form-control" placeholder="Ingresa tu contraseña">
                 </div>
-                 @if (session('mensaje'))
+                 {{-- @if (session('mensaje'))
                     <p>{{session('mensaje')}}</p>
-                 @endif
+                 @endif --}}
                                 
                 <button type="submit" class="btn btn-login w-100 text-white py-2 fw-bold">
                     <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
@@ -39,6 +40,15 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+     @if (session('mensaje') == 'incorrecto')
+        <script>
+            Swal.fire({
+                title: "Credenciales Incorrectas",
+                icon: "error",
+                draggable: true
+            });
+        </script>    
+    @endif
 </body>
 
 </html>
