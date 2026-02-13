@@ -113,7 +113,8 @@
 
                 <div class="price">
                     ${{ number_format($boleto['precio'], 2) }} MXN<br>
-                    Tipo: {{ $boleto['tipo'] }}
+                    Tipo: {{ $boleto['tipo'] }}<br>
+                    Metodo de pago: {{ $boleto['metodo_pago'] }}<br>
                     
                 </div>
 

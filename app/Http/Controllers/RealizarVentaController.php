@@ -97,6 +97,7 @@ class RealizarVentaController extends Controller
                 'fecha'   => $corrida->fecha,
                 'horario' => $corrida->horario,
                 'tipo'    => $request->$tipo,
+                'metodo_pago' =>$request->metodoPago,
                 'precio'  => $precio,                
                 'zona'    => $zona->direccion,    
             ];

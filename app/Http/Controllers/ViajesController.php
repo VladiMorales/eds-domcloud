@@ -55,6 +55,7 @@ class ViajesController extends Controller
             'fecha'   => $request->fecha,
             'horario' => $request->horario,
             'tipo'    => $request->tipo,
+            'metodo_pago' => $request->metodoPago,
             'precio'  => $request->precio,            
             'zona'    => $zona->direccion,
         ];

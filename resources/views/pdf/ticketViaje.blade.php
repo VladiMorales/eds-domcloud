@@ -110,8 +110,8 @@
 
                 <div class="price">
                     ${{ number_format($ticket['precio'], 2) }} MXN<br>
-                    Tipo: {{ $ticket['tipo'] }}
-                    
+                    Tipo: {{ $ticket['tipo'] }}<br>
+                    Metodo de Pago: {{ $ticket['metodo_pago'] }}
                 </div>
 
                 <div class="badge-vendido">
@@ -126,10 +126,7 @@
                     <p>Ventas y Facturación: ventas.enlacesds@outlook.es<br>
                         Este boleto es canjeable por factura
                     </p>
-                </div>
-                <!-- {{-- <div style="margin-top: 20px;">
-                    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate($boleto['folio'])) !!} ">
-                </div> --}} -->
+                </div>                
                 <div style="margin-top: 20px;">
                     
                 </div>
