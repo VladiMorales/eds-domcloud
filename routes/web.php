@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgenciaController;
+use App\Http\Controllers\BoletoController;
 use App\Http\Controllers\CorridasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -36,6 +37,8 @@ Route::middleware('auth')->group(function(){
     Route::post('/realizar-venta', [RealizarVentaController::class, 'venta'])->name('realizar.venta');
     Route::get('/boletos', [RealizarVentaController::class, 'boletos'])->name('boletos');
 
+    Route::get('/gestion-boletos', [BoletoController::class, 'index'])->name('boletos.gestion');
+    Route::post('/gestion-boletos', [BoletoController::class, 'encontrarVenta']);
 
     /* Rutas para la venta de viajes */
     Route::get('/viajes', [ViajesController::class, 'index'])->name('viajes');
