@@ -69,11 +69,12 @@
         }
         
         .img-logo{
-            width: 65%;
+            width: 45%;
         }
 
         .boleto-titulo{
-            font-size: 15px;
+            font-size: 10px;
+            color: #555;
         }
 
         .nombre-psj{
@@ -95,7 +96,9 @@
             </div>
             
             <div class="card-body">
-                <img src="{{ public_path('img/enlaces_logo.jpeg') }}" class="img-logo" alt="">
+                {{-- <img src="{{ public_path('img/enlaces_logo.jpeg') }}" class="img-logo" alt=""> --}}
+                <br>
+                <img src="{{ public_path('img/transport.png') }}" class="img-logo" alt="">
                 <h5 class="boleto-titulo">SAN CRISTOBAL DE LAS CASAS, CHIAPAS</h5>
                 <h2 class="boleto-no">BOLETO No. #{{ $boleto['id'] }}</h2>                
                 
@@ -103,7 +106,8 @@
                 
                 
                 <div class="route-info">
-                    <!-- {{-- &rarr;  --}} -->{{ $boleto['destino'] }}<br>
+                    <!-- {{-- &rarr;  --}} -->{{-- {{ $boleto['destino'] }} --}}
+                    EDS Transport<br>
                     {{ $boleto['fecha'] }}<br>
                     {{ $boleto['horario'] }}<br>
                     Abordaje: {{ $boleto['zona'] }}

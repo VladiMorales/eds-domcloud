@@ -73,7 +73,7 @@
         }
 
         .boleto-titulo{
-            font-size: 15px;
+            font-size: 10px;
         }
 
         .nombre-psj{
@@ -92,7 +92,8 @@
             </div>
             
             <div class="card-body">
-                <img src="{{ public_path('img/enlaces_logo.jpeg') }}" class="img-logo" alt="">
+                {{-- <img src="{{ public_path('img/enlaces_logo.jpeg') }}" class="img-logo" alt=""> --}}
+                <img src="{{ public_path('img/transport.png') }}" class="img-logo" alt="">
                 <h5 class="boleto-titulo">SAN CRISTOBAL DE LAS CASAS, CHIAPAS</h5>
                 <h2 class="boleto-no">VIAJE No. #{{ $ticket['id'] }}</h2>                
                 
