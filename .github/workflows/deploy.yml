@@ -1,0 +1,43 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main  # Cambia a 'master' si tu rama principal se llama así
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          # Entrar a la carpeta del proyecto
+          cd ${{ secrets.TARGET_DIR }}
+          
+          # 1. Descartar cambios locales (evita conflictos de composer.lock)
+          git checkout .
+          
+          # 2. Traer los cambios nuevos de GitHub
+          git pull origin main
+          
+          # 3. Instalar dependencias (usando la config de PHP del servidor)
+          composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+          
+          # 4. Correr migraciones y limpiar cachés
+          php artisan migrate --force
+          php artisan optimize:clear
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+          
+          # Nota: El storage:link lo hicimos manual, no es necesario aquí.
