@@ -46,5 +46,26 @@
             });
         </script>    
     @endif
+    @if (session('mensaje') == 'noexiste')
+        <script>
+            Swal.fire({
+                title: "Error",
+                text:"ID de Boleto no encontrado",
+                icon: "error",
+                draggable: true
+            });
+        </script>    
+    @endif
+    @if (session('mensaje') == 'eliminado')
+        <script>
+            Swal.fire({
+                title: "Realizado",
+                text:"Boletos y venta eliminados correctamente",
+                icon: "success",
+                draggable: true
+            });
+        </script>    
+    @endif
+    
 @endsection
     

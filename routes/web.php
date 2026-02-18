@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/gestion-boletos', [BoletoController::class, 'index'])->name('boletos.gestion');
     Route::post('/gestion-boletos', [BoletoController::class, 'encontrarVenta']);
+    Route::get('/cancelar-venta/{idV}/{idC}', [BoletoController::class, 'cancelarVenta'])->name('cancelar.venta');
 
     /* Rutas para la venta de viajes */
     Route::get('/viajes', [ViajesController::class, 'index'])->name('viajes');

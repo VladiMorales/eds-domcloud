@@ -46,7 +46,7 @@
                         </tbody>
                     </table>
                     <div>
-                        <a href="#" class="btn mb-2" style="background: var(--eds-gold); color: #000;">Cambiar Corrida</a>                        
+                        <a href="{{ route('cancelar.venta', ['idV' => $venta->id, 'idC' => $corrida]) }}" class="btn mb-2" style="background: var(--eds-gold); color: #000;">Cancelar Venta y Boletos</a>                        
                     </div>
                 </div>
             </div>
