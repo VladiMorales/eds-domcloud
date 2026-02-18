@@ -10,7 +10,7 @@ class Corrida extends Model
         'destino',
         'fecha',
         'horario',
-        'boletos_disponibles'
+        'boletos_vendidos'
     ];
 
     public function boletos()

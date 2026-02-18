@@ -12,14 +12,13 @@ class CorridasController extends Controller
 {
     public function index()
     {                
-        $corridas = Corrida::where('boletos_disponibles', '>', 0)->where('fecha', Carbon::now()->format('Y-m-d'))->get();        
+        $corridas = Corrida::where('fecha', Carbon::now()->format('Y-m-d'))->get();        
         return view('corridas.corridas', ["corridas" => $corridas]);
     }
 
     public function filtrar(Request $request)
     {
-        $corridas = Corrida::where('boletos_disponibles', '>', 0)
-                            ->whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin])->get();        
+        $corridas = Corrida::whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin])->get();        
         return view('corridas.corridas', ["corridas" => $corridas]);
     }
 
@@ -36,7 +35,7 @@ class CorridasController extends Controller
             'destino'        => 'Apto. Tuxtla',
             'fecha'          => $request->fecha,
             'horario'        => $request->horario,            
-            'boletos_disponibles' => 14
+            'boletos_vendidos' => 0
         ]);
 
         return redirect()->route('corridas')->with('mensaje', 'creado');

@@ -22,9 +22,7 @@ class RealizarVentaController extends Controller
 
     public function store(Request $request)
     {
-        $corridas = Corrida::where('fecha', $request->fecha)
-                            ->where('boletos_disponibles', '>=', intval($request->numero_boletos))
-                            ->get();        
+        $corridas = Corrida::where('fecha', $request->fecha)->get();
 
         return view('ventas.seleccionarCorrida', ['corridas' => $corridas, 'fecha' => $request->fecha, 'numBoletos' => intval($request->numero_boletos)]);
     }
@@ -46,14 +44,13 @@ class RealizarVentaController extends Controller
     {        
         //Busca la corrida y calcula el total de la venta
         $corrida = Corrida::find($request->corrida);
-        $zona = Zona::find($request->zona);
-        //$total = $corrida->precio_boleto * $request->boletos;
-        if($corrida->boletos_disponibles < $request->boletos){
+        $zona = Zona::find($request->zona);        
+        /* if($corrida->boletos_disponibles < $request->boletos){
             return redirect()->route('buscar.corridas')->with('mensaje', 'error');
-        }
+        } */
         $total = 0;             
         //Disminuye el número de boletos disponibles en la venta      
-        $corrida->boletos_disponibles -= $request->boletos;
+        $corrida->boletos_vendidos += $request->boletos;
         $corrida->save();
         //Inserta el nuevo registro en la tabla de ventas
         $venta = Venta::create([
@@ -63,7 +60,7 @@ class RealizarVentaController extends Controller
             'metodo_pago' => $request->metodoPago,
             'user_id' => auth()->id(),
             'agencia_id' => $request->agencia
-        ]);        
+        ]);
 
         //Realiza la inserción en la tabla de boletos
         $boletos =[];
