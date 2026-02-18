@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{{ asset('css/reporte.css') }}">
 @endsection
 
+@section('scripts-head')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@endsection
+
 @section('contenido')
     {{-- Aqui va el contenido --}}
     <div class="container-fluid mt-4">
@@ -46,7 +50,11 @@
                         </tbody>
                     </table>
                     <div>
-                        <a href="{{ route('cancelar.venta', ['idV' => $venta->id, 'idC' => $corrida]) }}" class="btn mb-2" style="background: var(--eds-gold); color: #000;">Cancelar Venta y Boletos</a>                        
+                        <form method="POST" id="form-cancelar" action="{{ route('cancelar.venta', ['idV' => $venta->id, 'idC' => $corrida]) }}">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" onclick="cancelarV()"  class="btn mb-2" style="background: var(--eds-gold); color: #000;">Cancelar Venta y Boletos</button>                        
+                        </form>
                     </div>
                 </div>
             </div>
@@ -87,4 +95,7 @@
         </div>
     </div>   
 @endsection
-    
+
+@section('scripts')
+    <script src="{{ asset('js/alertasBoletos.js')}}"></script>
+@endsection

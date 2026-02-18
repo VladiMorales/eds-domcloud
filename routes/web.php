@@ -37,9 +37,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/realizar-venta', [RealizarVentaController::class, 'venta'])->name('realizar.venta');
     Route::get('/boletos', [RealizarVentaController::class, 'boletos'])->name('boletos');
 
-    Route::get('/gestion-boletos', [BoletoController::class, 'index'])->name('boletos.gestion');
-    Route::post('/gestion-boletos', [BoletoController::class, 'encontrarVenta']);
-    Route::get('/cancelar-venta/{idV}/{idC}', [BoletoController::class, 'cancelarVenta'])->name('cancelar.venta');
+    
 
     /* Rutas para la venta de viajes */
     Route::get('/viajes', [ViajesController::class, 'index'])->name('viajes');
@@ -77,5 +75,10 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::post('/agencias', [AgenciaController::class, 'store']);    
     Route::delete('/agencias/{id}', [AgenciaController::class, 'destroy'])->name('agencias.delete');
     Route::patch('/agencias/{id}', [AgenciaController::class, 'update'])->name('agencias.update');
+
+    /* Cambios y cancelaciones de boletos */
+    Route::get('/gestion-boletos', [BoletoController::class, 'index'])->name('boletos.gestion');
+    Route::post('/gestion-boletos', [BoletoController::class, 'encontrarVenta']);
+    Route::delete('/cancelar-venta/{idV}/{idC}', [BoletoController::class, 'cancelarVenta'])->name('cancelar.venta');
 });
 

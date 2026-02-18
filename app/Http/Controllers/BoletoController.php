@@ -42,7 +42,8 @@ class BoletoController extends Controller
         $corrida = Corrida::find($idCorrida);
         $venta = Venta::find($idVenta);
         $corrida->boletos_vendidos -= $venta->boletos_vendidos;
-
+        $corrida->save();
+        
         $venta->delete();
 
         return redirect()->route('boletos.gestion')->with('mensaje', 'eliminado');
