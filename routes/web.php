@@ -11,6 +11,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RealizarVentaController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\ViajesController;
 
 Route::get('/', function () {
@@ -80,5 +81,10 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::get('/gestion-boletos', [BoletoController::class, 'index'])->name('boletos.gestion');
     Route::post('/gestion-boletos', [BoletoController::class, 'encontrarVenta']);
     Route::delete('/cancelar-venta/{idV}/{idC}', [BoletoController::class, 'cancelarVenta'])->name('cancelar.venta');
+
+    Route::get('/vendedores', [VendedorController::class, 'index'])->name('vendedores');
+    Route::post('/vendedores', [VendedorController::class, 'store']);
+    Route::delete('/vendedores/{id}', [VendedorController::class, 'destroy'])->name('vendedores.delete');
+    Route::patch('/vendedores/{id}', [VendedorController::class, 'update'])->name('vendedores.edit');
 });
 
