@@ -121,6 +121,7 @@
                     <th width="20%">Zona de Abordaje</th>
                     <th width="15%">Usuario</th>                  
                     <th width="15%">Agencia</th>
+                    <th width="15%">Vendedor</th>
                     
                 </tr>
             </thead>
@@ -131,7 +132,8 @@
                         <td>{{ $boleto->pasajero_nombre }}</td>
                         <td>{{ $boleto->zona->direccion }}</td>
                         <td>{{ $boleto->venta->user->name }}</td>
-                        <td>{{ $boleto->venta->agencia->nombre }}</td>                        
+                        <td>{{ $boleto->venta->agencia->nombre }}</td>
+                        <td>{{ $boleto->venta->vendedor->nombre }}</td>
                     </tr>
                 @endforeach
             </tbody>

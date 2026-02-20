@@ -6,6 +6,7 @@ use Safe\url;
 use App\Models\Venta;
 use App\Models\Agencia;
 use App\Models\Corrida;
+use App\Models\Vendedor;
 use App\Models\Zona;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -31,11 +32,13 @@ class RealizarVentaController extends Controller
     {
         $agencias = Agencia::all();
         $zonas = Zona::all();
+        $vendedores = Vendedor::all();
         return view('ventas.datosPasajero', [
             'id' => $id, 
             'numBoletos' => $numBoletos, 
             'agencias' => $agencias,
-            'zonas'    => $zonas
+            'zonas'    => $zonas,
+            'vendedores' => $vendedores
             ]
         );
     }
@@ -59,7 +62,8 @@ class RealizarVentaController extends Controller
             'fecha'  => now()->format('Y-m-d'),
             'metodo_pago' => $request->metodoPago,
             'user_id' => auth()->id(),
-            'agencia_id' => $request->agencia
+            'agencia_id' => $request->agencia,
+            'vendedor_id' => $request->vendedor
         ]);
 
         //Realiza la inserción en la tabla de boletos
