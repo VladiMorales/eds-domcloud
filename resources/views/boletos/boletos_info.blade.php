@@ -2,7 +2,7 @@
 
 @section('titulo')
     {{-- titulo de la pagina --}}
-    Información Venta
+    Cambios Venta
 @endsection
 
 @section('estilos')
@@ -49,12 +49,14 @@
                             </tr>                                                        
                         </tbody>
                     </table>
-                    <div>
-                        <form method="POST" id="form-cancelar" action="{{ route('cancelar.venta', ['idV' => $venta->id, 'idC' => $corrida]) }}">
+                    <div class="d-flex">
+                        <form class="me-2" method="POST" id="form-cancelar" action="{{ route('cancelar.venta', ['idV' => $venta->id, 'idC' => $corrida]) }}">
                             @method('DELETE')
                             @csrf
                             <button type="submit" onclick="cancelarV()"  class="btn mb-2" style="background: var(--eds-gold); color: #000;">Cancelar Venta y Boletos</button>                        
                         </form>
+                        
+                            <a href="#" class="btn mb-2" style="background: var(--eds-gold); color: #000;">Cambiar Corrida</a>
                     </div>
                 </div>
             </div>
@@ -71,7 +73,7 @@
                                 <th>Pasajero</th>
                                 <th>Tipo</th>
                                 <th>Zona de Abordaje</th>
-                                <th>Fecha</th>                                
+                                <th>Fecha</th>
                                 <th>Horario</th>
                             </tr>
                         </thead>

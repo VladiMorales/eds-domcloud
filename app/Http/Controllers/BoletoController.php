@@ -48,4 +48,6 @@ class BoletoController extends Controller
 
         return redirect()->route('boletos.gestion')->with('mensaje', 'eliminado');
     }
+
+    
 }

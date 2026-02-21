@@ -2,7 +2,7 @@
 
 @section('titulo')
     {{-- titulo de la pagina --}}
-    Dashboard - EDS
+    Cambios - EDS
 @endsection
 
 @section('estilos')
