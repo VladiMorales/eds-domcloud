@@ -56,7 +56,7 @@
                             <button type="submit" onclick="cancelarV()"  class="btn mb-2" style="background: var(--eds-gold); color: #000;">Cancelar Venta y Boletos</button>                        
                         </form>
                         
-                            <a href="#" class="btn mb-2" style="background: var(--eds-gold); color: #000;">Cambiar Corrida</a>
+                            <a href="{{ route('escoger.corrida', ['id' => $venta->id]) }}" class="btn mb-2" style="background: var(--eds-gold); color: #000;">Cambiar Corrida</a>
                     </div>
                 </div>
             </div>

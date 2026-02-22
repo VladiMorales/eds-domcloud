@@ -80,7 +80,13 @@ Route::middleware('can:isAdmin')->group(function () {
     /* Cambios y cancelaciones de boletos */
     Route::get('/gestion-boletos', [BoletoController::class, 'index'])->name('boletos.gestion');
     Route::post('/gestion-boletos', [BoletoController::class, 'encontrarVenta']);
-    Route::delete('/cancelar-venta/{idV}/{idC}', [BoletoController::class, 'cancelarVenta'])->name('cancelar.venta');
+    Route::delete('/cancelar-venta/{idV}/{idC}', [BoletoController::class, 'cancelarVenta'])->name('cancelar.venta');  
+    /* Cambio de corridas */  
+    Route::get('/cambiar-corrida/{id}', [BoletoController::class, 'escogerCorrida'])->name('escoger.corrida');
+    Route::post('/buscar-corrida-cambio', [BoletoController::class, 'buscarCorridas'])->name('buscar.corrida.cambio');
+    Route::get('/seleccionar-corrida/{idV}/{idC}', [BoletoController::class, 'seleccionarCorrida'])->name('seleccionar.corrida.cambio');
+    Route::get('/descargar-boletos-cambio/{id}', [BoletoController::class, 'imprimirBoletos'])->name('descargar.boletos.cambio');
+    
 
     Route::get('/vendedores', [VendedorController::class, 'index'])->name('vendedores');
     Route::post('/vendedores', [VendedorController::class, 'store']);
