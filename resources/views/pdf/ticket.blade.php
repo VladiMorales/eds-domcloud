@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Boletos de Viaje</title>
+    <title>Boletos de Venta</title>
     <style>
         body {
             font-family: 'Helvetica', sans-serif;

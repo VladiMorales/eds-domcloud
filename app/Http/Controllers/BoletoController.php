@@ -122,16 +122,9 @@ class BoletoController extends Controller
         // Tip: Cambiar el tamaño de papel si quieres que se vea más como ticket
         $pdf->setPaper('A5', 'portrait');     
         // 3. Generar y Guardar
-        $nombreArchivo = 'venta_' . $ventaId . '.pdf';
-        //Storage::put('public/boletos/' . $nombreArchivo, $pdf->output());
+        $nombreArchivo = 'venta_' . $ventaId . '.pdf';        
         Storage::disk('public')->put('boletos/' . $nombreArchivo, $pdf->output());
 
-/*         $url = Storage::disk('public')->url('boletos/' . $nombreArchivo);
-
-        return $url; */
-        /* return response()->json([
-            'url' => $url
-        ]); */
     }
     
 }

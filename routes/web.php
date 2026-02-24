@@ -37,12 +37,14 @@ Route::middleware('auth')->group(function(){
     Route::get('/pasajeros/{id}/{numBoletos}', [RealizarVentaController::class, 'pasajeros'])->name('pasajeros.nombres');
     Route::post('/realizar-venta', [RealizarVentaController::class, 'venta'])->name('realizar.venta');
     Route::get('/boletos', [RealizarVentaController::class, 'boletos'])->name('boletos');
+    Route::get('/descargar-boletos/{id}', [RealizarVentaController::class, 'imprimirBoletos'])->name('descargar.boletos');
 
     
 
     /* Rutas para la venta de viajes */
     Route::get('/viajes', [ViajesController::class, 'index'])->name('viajes');
     Route::post('/viajes', [ViajesController::class, 'store']);
+    Route::get('/boletos-viaje/{id}', [ViajesController::class, 'imprimirBoletos'])->name('boletos.viaje');
 
     /* Cerrar sesión */
     Route::post('/logout', [LogoutController::class, 'store'])->name('logout');

@@ -60,7 +60,16 @@ class ViajesController extends Controller
             'zona'    => $zona->direccion,
         ];
 
-        $url = $this->generarTicketViaje($ticket, $venta->id);
+        $this->generarTicketViaje($ticket, $venta->id);
+
+        return redirect()->route('boletos.viaje', ['id' => $venta->id]);
+        
+    }
+
+    public function imprimirBoletos($id)
+    {
+        $nombreArchivo = 'venta_' . $id . '.pdf';
+        $url = Storage::disk('public')->url('boletos/' . $nombreArchivo);
         return view('ventas.boletos', ['url' => $url]);
     }
 
@@ -74,14 +83,7 @@ class ViajesController extends Controller
         // 3. Generar y Guardar
         $nombreArchivo = 'venta_' . $ventaId . '.pdf';
         //Storage::put('public/boletos/' . $nombreArchivo, $pdf->output());
-        Storage::disk('public')->put('boletos/' . $nombreArchivo, $pdf->output());
-
-        $url = Storage::disk('public')->url('boletos/' . $nombreArchivo);
-
-        return $url;
-        /* return response()->json([
-            'url' => $url
-        ]); */
+        Storage::disk('public')->put('boletos/' . $nombreArchivo, $pdf->output());        
     
     }
 

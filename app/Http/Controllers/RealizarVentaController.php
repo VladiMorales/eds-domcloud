@@ -44,10 +44,7 @@ class RealizarVentaController extends Controller
     {        
         //Busca la corrida y calcula el total de la venta
         $corrida = Corrida::find($request->corrida);
-        $zona = Zona::find($request->zona);        
-        /* if($corrida->boletos_disponibles < $request->boletos){
-            return redirect()->route('buscar.corridas')->with('mensaje', 'error');
-        } */
+        $zona = Zona::find($request->zona);                
         $total = 0;             
         //Disminuye el número de boletos disponibles en la venta      
         $corrida->boletos_vendidos += $request->boletos;
@@ -106,9 +103,16 @@ class RealizarVentaController extends Controller
         $venta->total = $total;
         $venta->save();
         //return 
-        $url = $this->generarBoletosVenta($boletos, $venta->id);
-        return view('ventas.boletos', ['url' => $url]);
+        $this->generarBoletosVenta($boletos, $venta->id);
+        return redirect()->route('descargar.boletos', ['id' => $venta->id]);
 
+    }
+
+    public function imprimirBoletos($id)
+    {
+        $nombreArchivo = 'venta_' . $id . '.pdf';
+        $url = Storage::disk('public')->url('boletos/' . $nombreArchivo);
+        return view('ventas.boletos', ['url' => $url]);
     }
 
     
@@ -122,14 +126,9 @@ class RealizarVentaController extends Controller
         $pdf->setPaper('A5', 'portrait');     
         // 3. Generar y Guardar
         $nombreArchivo = 'venta_' . $ventaId . '.pdf';
-        //Storage::put('public/boletos/' . $nombreArchivo, $pdf->output());
+        
         Storage::disk('public')->put('boletos/' . $nombreArchivo, $pdf->output());
-
-        $url = Storage::disk('public')->url('boletos/' . $nombreArchivo);
-
-        return $url;
-        /* return response()->json([
-            'url' => $url
-        ]); */
+                
+        
     }
 }
