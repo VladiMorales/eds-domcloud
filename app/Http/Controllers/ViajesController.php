@@ -51,7 +51,7 @@ class ViajesController extends Controller
         $ticket = [
             'id' => $viaje->id,
             'nombre_pasajero' => $request->nombre,                
-            'destino' => 'Aeropuerto Tuxtla',
+            'destino' => $request->destino,
             'fecha'   => $request->fecha,
             'horario' => $request->horario,
             'tipo'    => $request->tipo,

@@ -86,9 +86,9 @@
                                 <i class="bi bi-check-circle me-2"></i>Realizar la Venta
                             </button>
                         </form>
-                        <button type="submit" class="mt-2 btn btn-confirm w-100">
+                        <a href="{{ route('buscar.corridas') }}" class="mt-2 btn btn-confirm w-100">
                             <i class="bi bi-x-circle me-2"></i>Cancelar Venta
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>            

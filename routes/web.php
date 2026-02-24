@@ -11,7 +11,6 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RealizarVentaController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\ViajesController;
 
 Route::get('/', function () {

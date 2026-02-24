@@ -41,6 +41,10 @@
                                         
                                     </select>
                                 </div>
+                                <div class="col-xs-4 mb-3">
+                                    <label class="form-label">Destino</label>
+                                    <input type="text" name="destino" class="form-control" required>
+                                </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Precio Viaje</label>
                                     <input type="number" name="precio" class="form-control" required>
@@ -85,9 +89,9 @@
                                 <i class="bi bi-check-circle me-2"></i>Realizar Venta Viaje
                             </button>
                         </form>
-                        <button type="submit" class="mt-2 btn btn-confirm w-100">
+                        <a href="{{ route('dashboard') }}" class="mt-2 btn btn-confirm w-100">
                             <i class="bi bi-x-circle me-2"></i>Cancelar Viaje
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>            
