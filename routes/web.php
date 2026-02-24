@@ -86,11 +86,6 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::post('/buscar-corrida-cambio', [BoletoController::class, 'buscarCorridas'])->name('buscar.corrida.cambio');
     Route::get('/seleccionar-corrida/{idV}/{idC}', [BoletoController::class, 'seleccionarCorrida'])->name('seleccionar.corrida.cambio');
     Route::get('/descargar-boletos-cambio/{id}', [BoletoController::class, 'imprimirBoletos'])->name('descargar.boletos.cambio');
-    
-
-    Route::get('/vendedores', [VendedorController::class, 'index'])->name('vendedores');
-    Route::post('/vendedores', [VendedorController::class, 'store']);
-    Route::delete('/vendedores/{id}', [VendedorController::class, 'destroy'])->name('vendedores.delete');
-    Route::patch('/vendedores/{id}', [VendedorController::class, 'update'])->name('vendedores.edit');
+        
 });
 

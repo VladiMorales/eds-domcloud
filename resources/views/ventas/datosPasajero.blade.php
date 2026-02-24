@@ -80,18 +80,7 @@
                                         @endforeach
                                                                                 
                                     </select>
-                                </div>
-
-                                <div class="col-12 mb-3">
-                                    <label class="form-label">Vendedor</label>
-                                    <select name="vendedor" class="form-select" required>
-                                        <option value="">--Selecciona Vendedor--</option>
-                                        @foreach ($vendedores as $vendedor)
-                                            <option value="{{ $vendedor->id }}">{{ $vendedor->nombre }}</option>
-                                        @endforeach
-                                                                                
-                                    </select>
-                                </div>
+                                </div>                                
                             </div>
                             <button type="submit" class="btn btn-confirm w-100">
                                 <i class="bi bi-check-circle me-2"></i>Realizar la Venta

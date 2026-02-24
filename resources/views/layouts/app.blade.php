@@ -38,9 +38,7 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('reportes') }}"><i
                                     class="bi bi-graph-up me-1"></i>Reportes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('agencias') }}"><i
-                                    class="bi bi-shop-window me-1"></i>Agencias</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('vendedores') }}"><i
-                                class="bi bi-person-vcard me-1"></i>Vendedores</a></li>   
+                                    class="bi bi-shop-window me-1"></i>Agencias</a></li>  
                         <li class="nav-item"><a class="nav-link" href="{{ route('boletos.gestion') }}"><i
                                 class="bi bi-ticket-perforated me-1"></i>Cambios</a></li>   
                     @endcan                    

@@ -15,8 +15,7 @@ class Venta extends Model
         'fecha',
         'metodo_pago',
         'user_id',
-        'agencia_id',
-        'vendedor_id'
+        'agencia_id'        
     ];
 
     public function scopeAplicarFiltros(Builder $query, array $filtros)
@@ -70,9 +69,5 @@ class Venta extends Model
     {
         return $this->belongsTo(Agencia::class);
     }
-
-    public function vendedor()
-    {
-        return $this->belongsTo(Vendedor::class);
-    }
+    
 }
