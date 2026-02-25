@@ -21,18 +21,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}"><i
-                                class="bi bi-house me-1"></i>Dashboard</a></li>
-                    @can('isAdmin')
+                    @role('admin', 'venta')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}"><i
+                                    class="bi bi-house me-1"></i>Dashboard</a></li>
+                    @endrole
+
+                    @role('admin')
                         <li class="nav-item"><a class="nav-link" href="{{ route('corridas') }}"><i
                                 class="bi bi-bus-front-fill me-1"></i>Corridas</a></li>    
-                    @endcan                                
+                    @endrole                            
                     
-                    <li class="nav-item"><a class="nav-link" href="{{ route('buscar.corridas') }}"><i
-                                class="bi bi-cart me-1"></i>Ventas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('viajes') }}"><i
-                                class="bi bi-luggage me-1"></i>Viajes</a></li>                   
-                    @can('isAdmin')
+                    @role('admin', 'venta')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('buscar.corridas') }}"><i
+                                    class="bi bi-cart me-1"></i>Ventas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('viajes') }}"><i
+                                    class="bi bi-luggage me-1"></i>Viajes</a></li>
+                    @endrole
+
+                    @role('admin')
                         <li class="nav-item"><a class="nav-link" href="{{ route('usuarios') }}"><i
                                 class="bi bi-people me-1"></i>Usuarios</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('reportes') }}"><i
@@ -41,7 +47,12 @@
                                     class="bi bi-shop-window me-1"></i>Agencias</a></li>  
                         <li class="nav-item"><a class="nav-link" href="{{ route('boletos.gestion') }}"><i
                                 class="bi bi-ticket-perforated me-1"></i>Cambios</a></li>   
-                    @endcan                    
+                    @endrole
+                    
+                    @role('checador')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('pasajeros.corrida') }}"><i
+                                class="bi bi-bus-front-fill me-1"></i>Corridas</a></li> 
+                    @endrole
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">

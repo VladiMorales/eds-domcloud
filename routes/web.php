@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgenciaController;
 use App\Http\Controllers\BoletoController;
+use App\Http\Controllers\ChecadorController;
 use App\Http\Controllers\CorridasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -18,14 +19,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'store']);
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
 //Rutas generales para un administrador y vendedor
-Route::middleware('auth')->group(function(){
+Route::middleware(['auth', 'role:admin,venta'])->group(function(){
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
@@ -50,7 +51,7 @@ Route::middleware('auth')->group(function(){
 });
 
 //Rutas para un administrador
-Route::middleware('can:isAdmin')->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
     /* Rutas para Crear, editar y eliminar usuarios */
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
     Route::post('/usuarios', [UserController::class, 'store']);
@@ -90,3 +91,6 @@ Route::middleware('can:isAdmin')->group(function () {
         
 });
 
+Route::middleware(['auth', 'role:checador'])->group(function () {
+    Route::get('pasajeros-corrida', [ChecadorController::class, 'index'])->name('pasajeros.corrida');
+});

@@ -99,6 +99,7 @@
                                 <option value="">--Selecciona un Tipo--</option>
                                 <option value="admin">Administrador</option>
                                 <option value="venta">Vendedor</option>
+                                <option value="checador">Checador</option>
                             </select>
                         </div>
                     

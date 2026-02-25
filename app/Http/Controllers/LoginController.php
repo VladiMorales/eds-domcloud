@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index()
-    {
-        if (Auth::check()) {
-            return redirect()->route('dashboard'); // Si ya está autenticado, redirigir al dashboard
-        }
+    {       
         return view('auth.login');        
     }
 
@@ -31,6 +28,14 @@ class LoginController extends Controller
             return back()->with('mensaje', 'incorrecto');
         }
 
-        return redirect()->route('dashboard');
+        $user = Auth::user();
+
+        if($user->tipo != 'checador'){
+            return redirect()->route('dashboard');
+        }else{
+            return redirect()->route('pasajeros.corrida');
+        }
+
+        
     }
 }

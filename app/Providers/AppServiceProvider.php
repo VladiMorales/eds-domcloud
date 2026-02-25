@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,14 +21,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Definimos una "Puerta" llamada 'isAdmin'
-        Gate::define('isAdmin', function (User $user) {
-            return $user->tipo === 'admin';
-        });
-
-        // Definimos otra para vendedores
-        Gate::define('isVendedor', function (User $user) {
-            return $user->tipo === 'vendedor';
+        // Creamos un "if" personalizado para Blade llamado 'role'
+        Blade::if('role', function (...$roles) {
+            // Verifica si está logueado Y si su tipo está en el arreglo de roles
+            return auth()->check() && in_array(auth()->user()->tipo, $roles);
         });
     }
 }
