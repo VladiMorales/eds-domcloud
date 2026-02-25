@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AgenciaController;
 use App\Http\Controllers\BoletoController;
-use App\Http\Controllers\ChecadorController;
 use App\Http\Controllers\CorridasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -50,6 +49,13 @@ Route::middleware(['auth', 'role:admin,venta'])->group(function(){
     Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 });
 
+//Ver las corridas y descargar la lista de pasajeros
+Route::middleware(['auth', 'role:admin,checador'])->group(function () {
+    Route::get('/corridas', [CorridasController::class, 'index'])->name('corridas');
+    Route::post('/corridas-filtradas', [CorridasController::class, 'filtrar'])->name('corridas.filtrar');
+    Route::get('/corridas-pasajeros/{id}', [CorridasController::class, 'boletos'])->name('corridas.pasajeros');
+});
+
 //Rutas para un administrador
 Route::middleware(['auth', 'role:admin'])->group(function () {
     /* Rutas para Crear, editar y eliminar usuarios */
@@ -58,11 +64,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.delete');
     Route::patch('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
 
-    /* Rutas para Crear, editar y eliminar corridas */
-    Route::get('/corridas', [CorridasController::class, 'index'])->name('corridas');
-    Route::post('/corridas', [CorridasController::class, 'store']);
-    Route::post('/corridas-filtradas', [CorridasController::class, 'filtrar'])->name('corridas.filtrar');
-    Route::get('/corridas-pasajeros/{id}', [CorridasController::class, 'boletos'])->name('corridas.pasajeros');
+    /* Rutas para Crear, editar y eliminar corridas */    
+    Route::post('/corridas', [CorridasController::class, 'store']);        
     Route::delete('/corridas/{id}', [CorridasController::class, 'destroy'])->name('corridas.delete');
     Route::patch('/corridas/{id}', [CorridasController::class, 'update'])->name('corridas.update');
 
@@ -91,6 +94,3 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         
 });
 
-Route::middleware(['auth', 'role:checador'])->group(function () {
-    Route::get('pasajeros-corrida', [ChecadorController::class, 'index'])->name('pasajeros.corrida');
-});

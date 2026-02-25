@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             return match($user->tipo) {
                 'admin'       => route('dashboard'),
                 'venta'    => route('dashboard'),
-                'checador'  => route('pasajeros.corrida'),
+                'checador'  => route('corridas'),
                 default => route('inicio'),
             };
         });

@@ -33,7 +33,7 @@ class LoginController extends Controller
         if($user->tipo != 'checador'){
             return redirect()->route('dashboard');
         }else{
-            return redirect()->route('pasajeros.corrida');
+            return redirect()->route('corridas');
         }
 
         

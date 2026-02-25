@@ -65,10 +65,13 @@ class CorridasController extends Controller
     public function boletos($id)
     {
         $boletos = Boleto::where('corrida_id', $id)->get();
+        $ordenados = $boletos->sortBy(function($item) {
+            return $item->zona->direccion;
+        });
         $corrida = Corrida::find($id);
         $fecha = Carbon::parse($corrida->fecha)->format('d/m/y');
         $horario = Carbon::parse($corrida->horario)->format('H:i');
-        $pdf = Pdf::loadView('exports.pasajeros_pdf', ['boletos' => $boletos, 'id' => $id, 'fecha' => $fecha, 'horario' => $horario])
+        $pdf = Pdf::loadView('exports.pasajeros_pdf', ['boletos' => $ordenados, 'id' => $id, 'fecha' => $fecha, 'horario' => $horario])
             ->setPaper('a4'); 
 
         return $pdf->download('pasajeros_corrida_'.$id.'.pdf');

@@ -26,7 +26,7 @@
                                     class="bi bi-house me-1"></i>Dashboard</a></li>
                     @endrole
 
-                    @role('admin')
+                    @role('admin', 'checador')
                         <li class="nav-item"><a class="nav-link" href="{{ route('corridas') }}"><i
                                 class="bi bi-bus-front-fill me-1"></i>Corridas</a></li>    
                     @endrole                            
@@ -48,11 +48,7 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('boletos.gestion') }}"><i
                                 class="bi bi-ticket-perforated me-1"></i>Cambios</a></li>   
                     @endrole
-                    
-                    @role('checador')
-                        <li class="nav-item"><a class="nav-link" href="{{ route('pasajeros.corrida') }}"><i
-                                class="bi bi-bus-front-fill me-1"></i>Corridas</a></li> 
-                    @endrole
+                                        
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
