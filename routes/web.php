@@ -45,9 +45,10 @@ Route::middleware(['auth', 'role:admin,venta'])->group(function(){
     Route::post('/viajes', [ViajesController::class, 'store']);
     Route::get('/boletos-viaje/{id}', [ViajesController::class, 'imprimirBoletos'])->name('boletos.viaje');
 
-    /* Cerrar sesión */
-    Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+    
 });
+
+
 
 //Ver las corridas y descargar la lista de pasajeros
 Route::middleware(['auth', 'role:admin,checador'])->group(function () {
@@ -94,3 +95,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         
 });
 
+/* Cerrar sesión */
+Route::middleware(['auth', 'role:admin,checador,venta'])->group(function () {
+    Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+});
