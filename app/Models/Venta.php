@@ -47,6 +47,12 @@ class Venta extends Model
         $query->when($agencia && $agencia !== 'todas', function ($q) use ($agencia) {
             $q->where('agencia_id', $agencia);
         });
+
+        // 5. Metodo de pago
+        $metodo = $filtros['metodo'] ?? null;
+        $query->when($metodo && $metodo !== 'todos', function ($q) use ($metodo) {
+            $q->where('metodo_pago', $metodo);
+        });
     }
    
 

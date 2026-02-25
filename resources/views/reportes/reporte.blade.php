@@ -78,6 +78,15 @@
                             @endforeach                                                        
                         </select>
                     </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Metodo Pago</label>
+                        <select name="metodo" class="form-select" required>
+                            <option value="todos" {{ old('metodo', request('metodo')) == 'todos' ? 'selected' : '' }}>Todos</option>
+                            <option value="Efectivo" {{ old('metodo', request('metodo')) == 'Efectivo' ? 'selected' : '' }}>Efectivo</option>
+                            <option value="Tarjeta" {{ old('metodo', request('metodo')) == 'Tarjeta' ? 'selected' : '' }}>Tarjeta</option>
+                            <option value="Transferencia" {{ old('metodo', request('metodo')) == 'Transferencia' ? 'selected' : '' }}>Transferencia</option>
+                        </select>
+                    </div>
                     <div class="col-12">
                         <button type="submit" class="btn" style="background: var(--eds-red); color: white;">Aplicar
                             Filtros</button>
