@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Safe\url;
-use App\Models\Venta;
 use App\Models\Agencia;
 use App\Models\Corrida;
+use App\Models\Venta;
 use App\Models\Zona;
-use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Container\Attributes\Auth;
+use Safe\url;
+
 
 class RealizarVentaController extends Controller
 {
@@ -43,6 +44,7 @@ class RealizarVentaController extends Controller
     public function venta(Request $request)
     {        
         //Busca la corrida y calcula el total de la venta
+        $usuario = Auth::user();
         $corrida = Corrida::find($request->corrida);
         $zona = Zona::find($request->zona);                
         $total = 0;             
@@ -55,7 +57,7 @@ class RealizarVentaController extends Controller
             'boletos_vendidos' => $request->boletos,
             'fecha'  => now()->format('Y-m-d'),
             'metodo_pago' => $request->metodoPago,
-            'user_id' => auth()->id(),
+            'user_id' => $usuario->id,
             'agencia_id' => $request->agencia            
         ]);
 
@@ -64,11 +66,26 @@ class RealizarVentaController extends Controller
         for ($i=0; $i<$request->boletos; $i++){
             $pasajero='pasajero'.($i+1);            
             $tipo='tipo'.($i+1);    
+            $precioB = 0;
+            $precio = 0;
 
-            if($request->$tipo=='niño'){
-                $precio = $request->precio/2; 
-            }else{
-                $precio = $request->precio; 
+            if($usuario->comision == 'si')
+            {
+                if($request->precio == 250){
+                    $precio = 190;                    
+                }elseif($request->precio == 230){
+                    $precio = 210;                    
+                }else{
+                    $precio = $request->precio - 20;
+                }
+                $precioB = $request->precio;
+            }else{                
+                if($request->$tipo=='niño'){
+                    $precio = $request->precio/2;                    
+                }else{
+                    $precio = $request->precio; 
+                }
+                $precioB = $precio;
             }
 
             $boleto=$corrida->boletos()->create([
@@ -92,7 +109,7 @@ class RealizarVentaController extends Controller
                 'horario' => $corrida->horario,
                 'tipo'    => $request->$tipo,
                 'metodo_pago' =>$request->metodoPago,
-                'precio'  => $precio,                
+                'precio'  => $precioB,                
                 'zona'    => $zona->direccion,    
             ];
             array_push($boletos, $b);
