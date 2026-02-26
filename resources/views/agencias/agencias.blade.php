@@ -34,6 +34,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Status</th>
                                 <th>Acciones</th>                                                      
                             </tr>
                         </thead>
@@ -41,7 +42,8 @@
                             @foreach ($agencias as $agencia)                            
                                 <tr>
                                     <td>{{ $agencia->id }}</td>
-                                    <td>{{ $agencia->nombre }}</td>                                                                                                         
+                                    <td>{{ $agencia->nombre }}</td>
+                                    <td>{{ $agencia->status }}</td>
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-outline-primary me-1" onclick="llenarInputs({{ $agencia }})" data-bs-toggle="modal"
                                             data-bs-target="#agenciaEditModal">
@@ -59,6 +61,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div>
+                        {{ $agencias->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>

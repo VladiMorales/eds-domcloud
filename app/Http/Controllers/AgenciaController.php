@@ -10,7 +10,7 @@ class AgenciaController extends Controller
     //
     public function index()
     {
-        $agencias = Agencia::all();
+        $agencias = Agencia::where('status', 'activo')->paginate(10);
         return view('agencias.agencias', ['agencias' => $agencias]);
     }
 
