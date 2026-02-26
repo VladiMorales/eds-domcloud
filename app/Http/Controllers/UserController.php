@@ -20,14 +20,16 @@ class UserController extends Controller
             'name'     => 'required', 
             'username' => 'required|unique:users', 
             'password' => 'required|confirmed', 
-            'tipo'     => 'required'
+            'tipo'     => 'required',
+            'comision' => 'required'            
         ]);
 
         User::create([
             'name'  => $request->name,
             'username' => $request->username,
             'password' => Hash::make($request->password),
-            'tipo'     => $request->tipo
+            'tipo'     => $request->tipo,
+            'comision' => $request->comision
         ]);
 
         return redirect()->route('usuarios')->with('mensaje', 'creado');
@@ -50,6 +52,7 @@ class UserController extends Controller
         $usuario->name = $request->name;
         $usuario->username = $request->username;
         $usuario->tipo = $request->tipo;
+        $usuario->comision = $request->comision;
         $usuario->save();
 
         return redirect()->route('usuarios')->with('mensaje', 'editado');

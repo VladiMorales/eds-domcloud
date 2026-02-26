@@ -34,6 +34,7 @@
                                 <th>Rol</th>
                                 <th>Nombre de Usuario</th>
                                 <th>Estatus</th>
+                                <th>Comisión</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -43,7 +44,8 @@
                                     <td>{{ $usuario->name }}</td>
                                     <td>{{ $usuario->tipo == "admin" ? "Administrador" : "Vendedor" }}</td>
                                     <td>{{ $usuario->username }}</td>
-                                    <td><span class="badge {{ $usuario->status == 'activo' ? 'bg-success' : 'bg-danger' }}">{{ $usuario->status }}</span></td>                                    
+                                    <td><span class="badge {{ $usuario->status == 'activo' ? 'bg-success' : 'bg-danger' }}">{{ $usuario->status }}</span></td>
+                                    <td>{{ $usuario->comision }}</td>
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal"
                                             data-bs-target="#userEditModal" onclick="llenarInputs({{ $usuario }})">
@@ -105,6 +107,14 @@
                                 <option value="checador">Checador</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Comisión</label>
+                            <select name="comision" class="form-select">
+                                <option value="">--Selecciona un Comisión--</option>
+                                <option value="si">Si</option>
+                                <option value="no">No</option>                                
+                            </select>
+                        </div>
                     
                 </div>
                 <div class="modal-footer">
@@ -135,21 +145,21 @@
                         <div class="mb-3">
                             <label class="form-label">Usuario</label>
                             <input type="text" id="usernameEdit" name="username" class="form-control">
-                        </div>
-                        {{-- <div class="mb-3">
-                            <label class="form-label">Contraseña</label>
-                            <input type="password" name="password" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Repite la Contraseña</label>
-                            <input type="password" name="password_confirmation" class="form-control">
-                        </div> --}}
+                        </div>                        
                         <div class="mb-3">
                             <label class="form-label">Rol</label>
                             <select id="tipoEdit" name="tipo" class="form-select">
                                 <option value="">--Selecciona un Tipo--</option>
                                 <option value="admin">Administrador</option>
                                 <option value="venta">Vendedor</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Comisión</label>
+                            <select name="comision" id="comisionEdit" class="form-select">
+                                <option value="">--Selecciona Comisión--</option>
+                                <option value="si">Si</option>
+                                <option value="no">No</option>                                
                             </select>
                         </div>
                     

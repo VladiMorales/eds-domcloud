@@ -53,10 +53,11 @@ function llenarInputs(usuario){
     const name = document.getElementById('nameEdit');
     const username = document.getElementById('usernameEdit');
     const tipo = document.getElementById('tipoEdit');
+    const comision = document.getElementById('comisionEdit');
 
     formulario.action = "/usuarios/"+usuario['id'];
     name.value = usuario['name'];
     username.value = usuario['username'];     
     tipo.value = usuario['tipo'];
-    
+    comision.value = usuario['comision']    
 }
