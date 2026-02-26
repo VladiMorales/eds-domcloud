@@ -22,7 +22,7 @@
             <h3><i class="bi bi-people me-2"></i>Gestión de Usuarios</h3>
             <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#userModal">
                 <i class="bi bi-plus-circle me-2"></i>Agregar Usuario
-            </button>
+            </button>            
         </div>
         <div class="card">
             <div class="card-body">
@@ -43,7 +43,7 @@
                                     <td>{{ $usuario->name }}</td>
                                     <td>{{ $usuario->tipo == "admin" ? "Administrador" : "Vendedor" }}</td>
                                     <td>{{ $usuario->username }}</td>
-                                    <td><span class="badge bg-success">{{ $usuario->status }}</span></td>                                    
+                                    <td><span class="badge {{ $usuario->status == 'activo' ? 'bg-success' : 'bg-danger' }}">{{ $usuario->status }}</span></td>                                    
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal"
                                             data-bs-target="#userEditModal" onclick="llenarInputs({{ $usuario }})">

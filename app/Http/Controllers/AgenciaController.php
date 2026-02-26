@@ -31,7 +31,8 @@ class AgenciaController extends Controller
     {
         $agencia = Agencia::find($id);
 
-        $agencia->delete();
+        $agencia->status = 'inactivo';
+        $agencia->save();
 
         return redirect()->route('agencias')->with('mensaje', 'eliminado');
     }

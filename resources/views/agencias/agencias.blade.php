@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>{{ $agencia->id }}</td>
                                     <td>{{ $agencia->nombre }}</td>
-                                    <td>{{ $agencia->status }}</td>
+                                    <td><span class="badge {{ $agencia->status == 'activo' ? 'bg-success' : 'bg-danger' }}">{{ $agencia->status }}</span></td>
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-outline-primary me-1" onclick="llenarInputs({{ $agencia }})" data-bs-toggle="modal"
                                             data-bs-target="#agenciaEditModal">

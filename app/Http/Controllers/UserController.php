@@ -12,7 +12,7 @@ class UserController extends Controller
     {        
         $usuarios = User::where('status', 'activo')->paginate(10);
         return view('usuarios.usuarios', ["usuarios" => $usuarios]);
-    }
+    }    
 
     public function store(Request $request)
     {        
@@ -37,7 +37,8 @@ class UserController extends Controller
     {        
         $usuario = User::find($id);
 
-        $usuario->delete();
+        $usuario->status = 'inactivo';
+        $usuario->save();
 
         return redirect()->route('usuarios')->with('mensaje', 'eliminado');
     }

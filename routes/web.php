@@ -60,8 +60,8 @@ Route::middleware(['auth', 'role:admin,checador'])->group(function () {
 //Rutas para un administrador
 Route::middleware(['auth', 'role:admin'])->group(function () {
     /* Rutas para Crear, editar y eliminar usuarios */
-    Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
-    Route::post('/usuarios', [UserController::class, 'store']);
+    Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');    
+    Route::post('/usuarios', [UserController::class, 'store']);    
     Route::delete('/usuarios/{id}', [UserController::class, 'destroy'])->name('usuarios.delete');
     Route::patch('/usuarios/{id}', [UserController::class, 'update'])->name('usuarios.update');
 
