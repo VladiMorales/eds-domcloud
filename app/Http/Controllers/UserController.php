@@ -9,9 +9,8 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index()
-    {
-        //$eventos=Evento::paginate(10);
-        $usuarios = User::paginate(10);
+    {        
+        $usuarios = User::where('status', 'activo')->paginate(10);
         return view('usuarios.usuarios', ["usuarios" => $usuarios]);
     }
 

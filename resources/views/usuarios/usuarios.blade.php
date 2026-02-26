@@ -43,7 +43,7 @@
                                     <td>{{ $usuario->name }}</td>
                                     <td>{{ $usuario->tipo == "admin" ? "Administrador" : "Vendedor" }}</td>
                                     <td>{{ $usuario->username }}</td>
-                                    <td><span class="badge bg-success">Activo</span></td>
+                                    <td><span class="badge bg-success">{{ $usuario->status }}</span></td>                                    
                                     <td class="d-flex">
                                         <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal"
                                             data-bs-target="#userEditModal" onclick="llenarInputs({{ $usuario }})">
@@ -61,6 +61,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div>
+                        {{ $usuarios->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>
