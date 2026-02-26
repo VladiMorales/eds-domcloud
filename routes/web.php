@@ -3,15 +3,16 @@
 use App\Http\Controllers\AgenciaController;
 use App\Http\Controllers\BoletoController;
 use App\Http\Controllers\CorridasController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RealizarVentaController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ReportesController;
+use App\Http\Controllers\ReportesVendedorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViajesController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -45,7 +46,8 @@ Route::middleware(['auth', 'role:admin,venta'])->group(function(){
     Route::post('/viajes', [ViajesController::class, 'store']);
     Route::get('/boletos-viaje/{id}', [ViajesController::class, 'imprimirBoletos'])->name('boletos.viaje');
 
-    
+    Route::get('/reportes-vendedor', [ReportesVendedorController::class, 'index'])->name('reportes.vendedor');
+    Route::post('/reportes-vendedor', [ReportesVendedorController::class, 'store']);
 });
 
 

@@ -48,6 +48,11 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('boletos.gestion') }}"><i
                                 class="bi bi-ticket-perforated me-1"></i>Cambios</a></li>   
                     @endrole
+
+                    @role('venta')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('reportes.vendedor') }}"><i
+                                    class="bi bi-graph-up me-1"></i>Reportes Ventas</a></li>
+                    @endrole
                                         
                 </ul>
                 <ul class="navbar-nav">

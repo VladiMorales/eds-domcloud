@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Venta::class);
     }
+
+    public function boletos()
+    {
+        return $this->hasManyThrough(Boleto::class, Venta::class);
+    }
 }
