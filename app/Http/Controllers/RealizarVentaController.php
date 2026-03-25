@@ -98,7 +98,7 @@ class RealizarVentaController extends Controller
                 'zona_id'  => $zona->id
             ]);
             
-            $boleto->folio = $corrida->id.$venta->id.$boleto->id;
+            $boleto->folio = $boleto->id;
             $boleto->save();
 
             $b = [
@@ -135,7 +135,6 @@ class RealizarVentaController extends Controller
     
     public function generarBoletosVenta($boletos, $ventaId)
     {              
-
         // 2. Cargamos la vista pasando la variable $boletos
         $pdf = Pdf::loadView('pdf.ticket', ['boletos' => $boletos]);
         
@@ -144,8 +143,6 @@ class RealizarVentaController extends Controller
         // 3. Generar y Guardar
         $nombreArchivo = 'venta_' . $ventaId . '.pdf';
         
-        Storage::disk('public')->put('boletos/' . $nombreArchivo, $pdf->output());
-                
-        
+        Storage::disk('public')->put('boletos/' . $nombreArchivo, $pdf->output());                        
     }
 }
