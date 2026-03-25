@@ -21,7 +21,7 @@
                         <h5><i class="bi bi-cart-plus me-2"></i>Vender Boleto</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('realizar.venta') }}" method="POST">
+                        <form action="{{ route('realizar.venta') }}" method="POST" id="formulario-venta">
                         @csrf
                             <div class="row">
                                 <div class="col-xs-4 mb-3 d-none">
@@ -82,7 +82,7 @@
                                     </select>
                                 </div>                                
                             </div>
-                            <button type="submit" class="btn btn-confirm w-100">
+                            <button type="submit" id="btn-pagar" class="btn btn-confirm w-100">
                                 <i class="bi bi-check-circle me-2"></i>Realizar la Venta
                             </button>
                         </form>
@@ -94,5 +94,28 @@
             </div>            
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const formulario = document.getElementById('formulario-venta');
+        const btnPagar = document.getElementById('btn-pagar');
+
+            formulario.addEventListener('submit', function (e) {
+                // Evitamos múltiples envíos cambiando el estado del botón
+                if (btnPagar.disabled) {
+                    e.preventDefault();
+                    return;
+                }
+
+                // Deshabilitamos el botón
+                btnPagar.disabled = true;
+                
+                // Opcional: Cambiamos el texto para dar retroalimentación al usuario
+                btnPagar.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Procesando...';
+            });
+        });
+    </script>
 @endsection
     
