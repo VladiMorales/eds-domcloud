@@ -172,7 +172,7 @@ class RealizarVentaController extends Controller
         $pdf = Pdf::loadView('pdf.ticket', ['boletos' => $boletos]);
         
         // Tip: Cambiar el tamaño de papel si quieres que se vea más como ticket
-        $pdf->setPaper('A5', 'portrait');     
+        $pdf->setPaper('A4', 'portrait');     
         // 3. Generar y Guardar
         $nombreArchivo = 'venta_' . $ventaId . '.pdf';
         
