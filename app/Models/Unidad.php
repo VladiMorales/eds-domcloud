@@ -11,4 +11,9 @@ class Unidad extends Model
     protected $fillable = [
         'numero'
     ];
+
+    public function corridas() 
+    { 
+        return $this->hasMany(Corrida::class); 
+    }
 }

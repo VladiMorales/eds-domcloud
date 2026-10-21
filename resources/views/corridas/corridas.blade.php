@@ -65,6 +65,7 @@
                                 <th>Fecha</th>
                                 <th>Horario</th>                                                               
                                 <th>Boletos Vendidos</th>
+                                <th>Unidad</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -75,7 +76,8 @@
                                     <td>{{ $corrida->destino }}</td>
                                     <td>{{ $corrida->fecha }}</td>
                                     <td>{{ $corrida->horario }}</td>                                                                    
-                                    <td>{{ $corrida->boletos_vendidos }}</td>                                    
+                                    <td>{{ $corrida->boletos_vendidos }}</td>                              
+                                    <td>{{ $corrida->unidad->numero }}</td>
                                     <td class="d-flex">
                                         @role('admin')
                                             <button class="btn btn-sm btn-outline-primary me-1" onclick="llenarInputs({{ $corrida }})" data-bs-toggle="modal"
@@ -122,7 +124,16 @@
                             <div class="mb-3">
                                 <label class="form-label">Horario de Salida</label>
                                 <input type="time" name="horario" class="form-control" required>
-                            </div>                        
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Unidad</label>
+                                <select name="unidad" class="form-select" required="">
+                                    <option value="">--Selecciona la Unidad--</option>
+                                    @foreach ($unidades as $unidad)
+                                        <option value="{{ $unidad->id }}">{{ $unidad->numero }}</option>
+                                    @endforeach                                   
+                                </select>
+                            </div>                  
                             {{-- <div class="mb-3">
                                 <label class="form-label">Boletos Disponibles</label>
                                 <input type="number" name="boletos_disponibles" value="14" class="form-control" required>

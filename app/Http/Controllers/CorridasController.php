@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Boleto;
 use App\Models\Corrida;
+use App\Models\Unidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -12,8 +13,9 @@ class CorridasController extends Controller
 {
     public function index()
     {                
-        $corridas = Corrida::where('fecha', Carbon::now()->format('Y-m-d'))->get();        
-        return view('corridas.corridas', ["corridas" => $corridas]);
+        $corridas = Corrida::with('unidad')->where('fecha', Carbon::now()->format('Y-m-d'))->get();
+        $unidades = Unidad::orderBy('numero', 'desc')->get();  
+        return view('corridas.corridas', ["corridas" => $corridas, 'unidades' => $unidades]);
     }
 
     public function filtrar(Request $request)
@@ -28,14 +30,16 @@ class CorridasController extends Controller
     {        
         $request->validate([
             'fecha'     => 'required', 
-            'horario' => 'required',             
+            'horario' => 'required', 
+            'unidad' => 'required'            
         ]);
 
         Corrida::create([
             'destino'        => 'Apto. Tuxtla',
             'fecha'          => $request->fecha,
             'horario'        => $request->horario,            
-            'boletos_vendidos' => 0
+            'boletos_vendidos' => 0,
+            'unidad_id' => $request->unidad
         ]);
 
         return redirect()->route('corridas')->with('mensaje', 'creado');

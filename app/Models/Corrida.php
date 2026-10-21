@@ -12,7 +12,8 @@ class Corrida extends Model
         'destino',
         'fecha',
         'horario',
-        'boletos_vendidos'
+        'boletos_vendidos',
+        'unidad_id'
     ];
 
 
@@ -35,5 +36,12 @@ class Corrida extends Model
     public function boletos()
     {
         return $this->hasMany(Boleto::class);
+    }
+
+    public function unidad() 
+    { 
+        return $this->belongsTo(Unidad::class)->withDefault([
+            'numero' => 'Ninguna'
+        ]); 
     }
 }
