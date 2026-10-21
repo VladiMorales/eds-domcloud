@@ -20,9 +20,14 @@
         @role('admin')
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h3><i class="bi bi-bus-front-fill me-2"></i>Gestión de Corridas</h3>
-                <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#corridaModal">
-                    <i class="bi bi-plus-circle me-2"></i>Agregar Corrida
-                </button>
+                <div>
+                    <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#corridaModal">
+                        <i class="bi bi-plus-circle me-2"></i>Agregar Corrida
+                    </button>
+                    <button class="btn btn-add" data-bs-toggle="modal" data-bs-target="#unidadModal">
+                        <i class="bi bi-plus-circle me-2"></i>Agregar Unidad
+                    </button>
+                </div>
             </div>
         @endrole
         <div class="card">
@@ -132,6 +137,32 @@
                 </div>
             </div>
         </div>
+
+    {{-- Modal Agregar Unidad --}}
+    <div class="modal fade" id="unidadModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background: var(--eds-gold); color: #000;">
+                        <h5 class="modal-title">Crear Unidad</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('unidades') }}">
+                            @csrf
+                            <div class="mb-3">
+                                <label class="form-label">Número de Unidad</label>
+                                <input type="text" name="numero" class="form-control" required>
+                            </div>                                                                                                                               
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn" style="background: var(--eds-red); color: white;">Guardar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     @endrole
 
     {{-- Modal Editar Corrida --}}
@@ -169,6 +200,11 @@
 
 @section('scripts')
     <script src="{{ asset('js/alertasCorridas.js')}}"></script>
+    @if (session('mensaje') == 'unidad-creada')
+        <script>
+            unidadCreada();
+        </script>
+    @endif
     @if (session('mensaje') == 'creado')
         <script>
             corridaCreada();

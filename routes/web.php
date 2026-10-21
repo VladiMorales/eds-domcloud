@@ -10,6 +10,7 @@ use App\Http\Controllers\RealizarVentaController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\ReportesVendedorController;
+use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViajesController;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/corridas', [CorridasController::class, 'store']);        
     Route::delete('/corridas/{id}', [CorridasController::class, 'destroy'])->name('corridas.delete');
     Route::patch('/corridas/{id}', [CorridasController::class, 'update'])->name('corridas.update');
+
+    Route::post('/unidades', [UnidadController::class, 'store'])->name('unidades');
 
     /* Rutas reportes */
     Route::get('/reportes', [ReportesController::class, 'index'])->name('reportes');

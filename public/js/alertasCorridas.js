@@ -8,6 +8,14 @@ function corridaCreada(){
     });
 }
 
+function unidadCreada(){
+    Swal.fire({
+        title: "Unidad Creada Correctamente",
+        icon: "success",
+        draggable: true
+    });
+}
+
 function corridaEditada(){
     Swal.fire({
         title: "Corrida Editada Correctamente",
