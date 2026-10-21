@@ -21,7 +21,8 @@ class CorridasController extends Controller
     public function filtrar(Request $request)
     {
         $corridas = Corrida::whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin])->get();        
-        return view('corridas.corridas', ["corridas" => $corridas]);
+        $unidades = Unidad::orderBy('numero', 'desc')->get();  
+        return view('corridas.corridas', ["corridas" => $corridas, 'unidades' => $unidades]);
     }
 
     
