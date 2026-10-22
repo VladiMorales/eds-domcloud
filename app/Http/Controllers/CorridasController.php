@@ -69,7 +69,8 @@ class CorridasController extends Controller
     public function updateUnidad (Request $request, $id)
     {        
         $corrida = Corrida::find($id);
-        $corrida->unidad_id = $request->unidad;
+        $unidad = ($request->unidad == -1) ? null : $request->unidad;
+        $corrida->unidad_id = $unidad;
         $corrida->save();
 
         return redirect()->route('corridas')->with('mensaje', 'editado');
