@@ -25,7 +25,7 @@ class RealizarVentaController extends Controller
 
     public function store(Request $request)
     {
-        $corridas = Corrida::where('fecha', $request->fecha)->get();
+        $corridas = Corrida::with('unidad')->where('fecha', $request->fecha)->get();
 
         return view('ventas.seleccionarCorrida', ['corridas' => $corridas, 'fecha' => $request->fecha, 'numBoletos' => intval($request->numero_boletos)]);
     }
