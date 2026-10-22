@@ -67,3 +67,13 @@ function llenarInputs(corrida){
     precio.value = corrida['precio_boleto']
     
 }
+
+function llenarInputsUnidad(corrida, unidad){   
+    const formulario = document.getElementById('formUnidad');  
+    const txtCorrida  = document.getElementById('idCorridaAsig');
+    const txtUnidad = document.getElementById('unidadActual');
+
+    formulario.action = "/corridasUnidad/"+corrida['id'];
+    txtCorrida.textContent  = "Corrida: " + corrida['id'];
+    txtUnidad.textContent = (unidad['numero']!="Ninguna") ? "Unidad Actual: " + unidad['id'] : "Unidad Actual: Por Asignar";
+}

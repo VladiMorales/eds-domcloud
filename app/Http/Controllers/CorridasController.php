@@ -25,8 +25,6 @@ class CorridasController extends Controller
         return view('corridas.corridas', ["corridas" => $corridas, 'unidades' => $unidades]);
     }
 
-    
-
     public function store(Request $request)
     {        
         $request->validate([
@@ -35,12 +33,14 @@ class CorridasController extends Controller
             'unidad' => 'required'            
         ]);
 
+        $unidad = ($request->unidad == -1) ? null : $request->unidad;
+    
         Corrida::create([
             'destino'        => 'Apto. Tuxtla',
             'fecha'          => $request->fecha,
             'horario'        => $request->horario,            
             'boletos_vendidos' => 0,
-            'unidad_id' => $request->unidad
+            'unidad_id' => $unidad
         ]);
 
         return redirect()->route('corridas')->with('mensaje', 'creado');
@@ -60,8 +60,16 @@ class CorridasController extends Controller
         $corrida = Corrida::find($id);
 
         $corrida->fecha = $request->fecha;
-        $corrida->horario = $request->horario;
-        /* $corrida->precio_boleto = $request->precio_boleto; */
+        $corrida->horario = $request->horario;        
+        $corrida->save();
+
+        return redirect()->route('corridas')->with('mensaje', 'editado');
+    }
+
+    public function updateUnidad (Request $request, $id)
+    {        
+        $corrida = Corrida::find($id);
+        $corrida->unidad_id = $request->unidad;
         $corrida->save();
 
         return redirect()->route('corridas')->with('mensaje', 'editado');

@@ -79,7 +79,11 @@
                                     <td>{{ $corrida->boletos_vendidos }}</td>                              
                                     <td>{{ $corrida->unidad->numero }}</td>
                                     <td class="d-flex">
-                                        @role('admin')
+                                            <button class="btn btn-sm btn-outline-primary me-1"  onclick="llenarInputsUnidad({{ $corrida }}, {{ $corrida->unidad }})" data-bs-toggle="modal"
+                                                data-bs-target="#corridaUnidad">
+                                                <i class="bi bi-bus-front"></i>                                                
+                                            </button>
+                                        @role('admin')                                            
                                             <button class="btn btn-sm btn-outline-primary me-1" onclick="llenarInputs({{ $corrida }})" data-bs-toggle="modal"
                                                 data-bs-target="#corridaEditModal">
                                                 <i class="bi bi-pencil"></i>
@@ -129,15 +133,12 @@
                                 <label class="form-label">Unidad</label>
                                 <select name="unidad" class="form-select" required="">
                                     <option value="">--Selecciona la Unidad--</option>
+                                    <option value="-1">Por Asignar</option>
                                     @foreach ($unidades as $unidad)
                                         <option value="{{ $unidad->id }}">{{ $unidad->numero }}</option>
                                     @endforeach                                   
                                 </select>
-                            </div>                  
-                            {{-- <div class="mb-3">
-                                <label class="form-label">Boletos Disponibles</label>
-                                <input type="number" name="boletos_disponibles" value="14" class="form-control" required>
-                            </div>   --}}                      
+                            </div>                                                       
                         
                     </div>
                     <div class="modal-footer">
@@ -151,31 +152,67 @@
 
     {{-- Modal Agregar Unidad --}}
     <div class="modal fade" id="unidadModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="background: var(--eds-gold); color: #000;">
-                        <h5 class="modal-title">Crear Unidad</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" action="{{ route('unidades') }}">
-                            @csrf
-                            <div class="mb-3">
-                                <label class="form-label">Número de Unidad</label>
-                                <input type="text" name="numero" class="form-control" required>
-                            </div>                                                                                                                               
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button  class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn" style="background: var(--eds-red); color: white;">Guardar</button>
-                    </div>
-                    </form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background: var(--eds-gold); color: #000;">
+                    <h5 class="modal-title">Crear Unidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('unidades') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Número de Unidad</label>
+                            <input type="text" name="numero" class="form-control" required>
+                        </div>                                                                                                                               
+                    
+                </div>
+                <div class="modal-footer">
+                    <button  class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn" style="background: var(--eds-red); color: white;">Guardar</button>
+                </div>
+                </form>
             </div>
         </div>
+    </div>
     @endrole
 
+    {{-- Modal Asignar unidad Corrida --}}
+    <div class="modal fade" id="corridaUnidad">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background: var(--eds-gold); color: #000;">
+                    <h5 class="modal-title">Asignar Unidad</h5>                        
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="idCorridaAsig"></p>
+                    <p id="unidadActual"></p>
+                    <form method="POST" id="formUnidad" action="#">
+                        @method('PATCH')
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Selecciona una unidad</label>
+                            <select name="unidad" class="form-select" required="">
+                                <option value="">--Selecciona la Unidad--</option>
+                                <option value="-1">Por Asignar</option>
+                                @foreach ($unidades as $unidad)
+                                    <option value="{{ $unidad->id }}">{{ $unidad->numero }}</option>
+                                @endforeach                                   
+                            </select>
+                        </div>                                                                                                                             
+                    
+                </div>
+                <div class="modal-footer">
+                    <button  class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn" style="background: var(--eds-red); color: white;">Guardar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
     {{-- Modal Editar Corrida --}}
     @role('admin')        
         <div class="modal fade" id="corridaEditModal">
@@ -186,23 +223,24 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="{{ route('corridas') }}" id="formEdit">
-                            @method('PATCH')
-                            @csrf
-                            <div class="mb-3">
-                                <label class="form-label">Fecha de Salida</label>
-                                <input type="date" id="fechaEdit" name="fecha" class="form-control" required>
-                            </div>                        
-                            <div class="mb-3">
-                                <label class="form-label">Horario de Salida</label>
-                                <input type="time" id="horarioEdit" name="horario" class="form-control" required>
-                            </div>                                                             
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
-                        <button type="submit" class="btn" style="background: var(--eds-red); color: white;">Guardar</button>
-                    </div>
-                    </form>
+                        {{-- El action lo define java script en archivo alertasCorridas.js --}}
+                        <form method="POST" action="#" id="formEdit">
+                                @method('PATCH')
+                                @csrf
+                                <div class="mb-3">
+                                    <label class="form-label">Fecha de Salida</label>
+                                    <input type="date" id="fechaEdit" name="fecha" class="form-control" required>
+                                </div>                        
+                                <div class="mb-3">
+                                    <label class="form-label">Horario de Salida</label>
+                                    <input type="time" id="horarioEdit" name="horario" class="form-control" required>
+                                </div>                                                             
+                        </div>
+                            <div class="modal-footer">
+                                <a href="#" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+                                <button type="submit" class="btn" style="background: var(--eds-red); color: white;">Guardar</button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>

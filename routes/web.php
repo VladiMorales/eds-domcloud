@@ -53,11 +53,13 @@ Route::middleware(['auth', 'role:admin,venta'])->group(function(){
 
 
 
-//Ver las corridas y descargar la lista de pasajeros
+//Ver las corridas y descargar la lista de pasajeros -- Agregar unidad a la corrida
 Route::middleware(['auth', 'role:admin,checador'])->group(function () {
     Route::get('/corridas', [CorridasController::class, 'index'])->name('corridas');
     Route::post('/corridas-filtradas', [CorridasController::class, 'filtrar'])->name('corridas.filtrar');
     Route::get('/corridas-pasajeros/{id}', [CorridasController::class, 'boletos'])->name('corridas.pasajeros');
+
+    Route::patch('/corridasUnidad/{id}', [CorridasController::class, 'updateUnidad']);
 });
 
 //Rutas para un administrador
