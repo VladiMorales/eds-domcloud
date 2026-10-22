@@ -41,7 +41,7 @@ class Corrida extends Model
     public function unidad() 
     { 
         return $this->belongsTo(Unidad::class)->withDefault([
-            'numero' => 'Ninguna'
+            'numero' => 'Por Asignar'
         ]); 
     }
 }
