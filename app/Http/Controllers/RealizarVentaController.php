@@ -25,8 +25,7 @@ class RealizarVentaController extends Controller
 
     public function store(Request $request)
     {
-        $corridas = Corrida::with('unidad')->where('fecha', $request->fecha)->get();
-
+        $corridas = Corrida::with('unidad')->where('fecha', $request->fecha)->where('boletos_disponibles', '>=', $request->numero_boletos)->get();
         return view('ventas.seleccionarCorrida', ['corridas' => $corridas, 'fecha' => $request->fecha, 'numBoletos' => intval($request->numero_boletos)]);
     }
 
@@ -47,6 +46,15 @@ class RealizarVentaController extends Controller
 {
     $usuario = Auth::user();
     
+    /* $corrida = Corrida::where('id', $request->corrida)->get();
+    dd($corrida->horario);
+    */
+    $corrida = Corrida::find(intval($request->corrida));       
+    if(intval($request->boletos) > $corrida->boletos_disponibles){            
+        return redirect()->route('buscar.corridas')->with('mensaje', 'agotado');
+    } 
+    
+
     try {
         // 2. INICIAR TRANSACCIÓN DE BASE DE DATOS
         DB::beginTransaction();
@@ -54,10 +62,11 @@ class RealizarVentaController extends Controller
         // 3. BLOQUEO PESIMISTA
         // lockForUpdate() evita que otro proceso modifique esta corrida hasta que terminemos
         $corrida = Corrida::where('id', $request->corrida)->lockForUpdate()->firstOrFail();
-        $zona = Zona::findOrFail($request->zona);
-
+        $zona = Zona::findOrFail($request->zona);                       
+        
         // Disminuye (o en tu caso, aumenta) el número de boletos vendidos
         $corrida->boletos_vendidos += $request->boletos;
+        $corrida->boletos_disponibles -= $request->boletos;
         $corrida->save();
 
         // Inserta el nuevo registro en la tabla de ventas

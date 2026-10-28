@@ -13,6 +13,7 @@ class Corrida extends Model
         'fecha',
         'horario',
         'boletos_vendidos',
+        'boletos_disponibles',
         'unidad_id'
     ];
 

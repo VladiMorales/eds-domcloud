@@ -40,6 +40,7 @@ class CorridasController extends Controller
             'fecha'          => $request->fecha,
             'horario'        => $request->horario,            
             'boletos_vendidos' => 0,
+            'boletos_disponibles' => 14,
             'unidad_id' => $unidad
         ]);
 

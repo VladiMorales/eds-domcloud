@@ -65,6 +65,7 @@
                                 <th>Fecha</th>
                                 <th>Horario</th>                                                               
                                 <th>Boletos Vendidos</th>
+                                {{-- <th>Boletos Disponibles</th> --}}
                                 <th>Unidad</th>
                                 <th>Acciones</th>
                             </tr>
@@ -76,7 +77,8 @@
                                     <td>{{ $corrida->destino }}</td>
                                     <td>{{ $corrida->fecha }}</td>
                                     <td>{{ $corrida->horario }}</td>                                                                    
-                                    <td>{{ $corrida->boletos_vendidos }}</td>                              
+                                    <td>{{ $corrida->boletos_vendidos }}</td>                            
+                                    {{-- <td>{{ $corrida->boletos_disponibles }}</td> --}}
                                     <td>{{ $corrida->unidad->numero }}</td>
                                     <td class="d-flex">
                                             <button class="btn btn-sm btn-outline-primary me-1"  onclick="llenarInputsUnidad({{ $corrida }}, {{ $corrida->unidad }})" data-bs-toggle="modal"

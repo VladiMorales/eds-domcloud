@@ -19,22 +19,26 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
+                    @if(!$corridas->isEmpty())
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Horario</th>                                                                
                                 <th>Boletos Vendidos</th>
+                                {{-- <th>Boletos Disponibles</th> --}}
                                 <th>Unidad</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>                            
+                        
+                        <tbody>  
                             @foreach ($corridas as $corrida)
                                 <tr>
                                     <td>{{ $corrida->id }}</td>
                                     <td>{{ $corrida->horario }}</td>                                                                    
                                     <td>{{ $corrida->boletos_vendidos }}</td>
+                                    {{-- <td>{{ $corrida->boletos_disponibles }}</td> --}}
                                     <td>{{ $corrida->unidad->numero }}</td>                                                                                                       
                                     <td class="d-flex">
                                         <a href="{{ route('pasajeros.nombres', ['id'=>$corrida->id, 'numBoletos' => $numBoletos]) }}" class="btn btn-sm btn-outline-primary me-1">
@@ -42,9 +46,13 @@
                                         </a>                                        
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach                        
                         </tbody>
+                        
                     </table>
+                    @else
+                    <h3>No se encontraron corridas o no hay boletos disponibles</h3>
+                    @endif
                 </div>
             </div>
         </div>

@@ -40,11 +40,12 @@
     </section>
 @endsection
 
-@section('scripts')    
-    @if (session('mensaje') == 'error')
+@section('scripts')      
+    @if (session('mensaje') == 'agotado')
         <script>
             Swal.fire({
                 title: "Boletos no disponibles",
+                text: "Los boletos se agotaron, intenta en otra corrida",
                 icon: "error",
                 draggable: true
             });
